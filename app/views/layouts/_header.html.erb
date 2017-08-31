@@ -16,5 +16,12 @@
 						<li href ="current"><%= link_to "Karte", pages_karte_path %></li>
 						<li href ="current"><%= link_to "Profil", pages_profil_path %></li>
 						<li href ="current"><%= link_to "Vergleich", pages_vergleich_path %></li>
+						
+						<!-- Angepasste Anzeige bei eingeloggtem/nicht eingeloggtem User -->
+						<% if user_signed_in? %>
+							<li href ="current"><%= link_to "Abmelden", destroy_user_session_path, method: :delete %></li>
+						<% else %>
+							<li href ="current"><%= link_to "Logge dich ein!", new_user_session_path %></li>
+						<% end %>
 					</ul>
 				</nav>
