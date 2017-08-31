@@ -7,8 +7,15 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  
+<!-- Ausgelagerter Header -->  
+<%= render "layouts/header" %>
 
-<%= yield %>
+<!-- dynamischer Inhalt --> 
+<%= yield %> 
+
+<!-- Ausgelagerter Footer --> 
+<%= render "layouts/footer" %>
 
 </body>
 </html>
