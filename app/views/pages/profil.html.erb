@@ -1,5 +1,5 @@
-<h1>Pages#profil</h1>
-<p>Find me in app/views/pages/profil.html.erb</p>
+
+<h2 class="major"><span>Dein Profil</span></h2>
 
 
 <ul class="divided">
@@ -36,10 +36,12 @@
         <%= "/" %>
 	<% end %>
 	
+	<li>
 	<% if user_signed_in? %>
 	    <%= link_to "bearbeiten", edit_user_registration_path %>
 	<% else %>
 	    <%= link_to "Account erstellen", new_user_registration_path %>
 	<% end %>
-	
+	</li>
 </ul>
+
