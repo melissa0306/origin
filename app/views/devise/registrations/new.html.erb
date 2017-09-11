@@ -2,38 +2,40 @@
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
-  
+
+<div style="margin-left:2.5em; padding-left:2.5em;">    <!-- Einrückung -->
+    
   <div class="field">
-    <%= f.label :username %><br />
-    <%= f.text_field :username, autofocus: true %>
+    <%= f.label :username %>
+    <%= f.text_field :username, autofocus: true %><br />
   </div>
   
   <div class="field">
-    <%= f.label :birthday %><br />
-    <%= f.date_field :birthday %>
+    <%= f.label :birthday %>
+    <%= f.date_field :birthday %><br />
   </div>
   
   <div class="field">
-    <%= f.label :place_of_residence %><br />
-    <%= f.text_field :place_of_residence %>
+    <%= f.label :place_of_residence %>
+    <%= f.text_field :place_of_residence %><br />
   </div>
   
    <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email %>
-  </div
+    <%= f.label :email %>
+    <%= f.email_field :email %><br />
+  </div>
 
   <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+    <%= f.password_field :password, autocomplete: "off" %> <br />
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, autocomplete: "off" %><br />
   </div>
 
   <div class="actions">
@@ -42,3 +44,4 @@
 <% end %>
 
 <%= render "devise/shared/links" %>
+</div>

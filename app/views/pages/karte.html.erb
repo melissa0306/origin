@@ -1,2 +1,7 @@
-<h1>Pages#karte</h1>
-<p>Find me in app/views/pages/karte.html.erb</p>
+
+
+<%= simple_form_for(@protocol) do |f| %>
+<%= f.input :selected_means_of_transport, collection: @balance.means_of_transport, label: "Wähle Transportmittel", include_blank: false %>
+<%= f.submit %>
+<& end %> 
+
