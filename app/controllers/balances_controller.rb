@@ -3,7 +3,7 @@ class BalancesController < ApplicationController
     before_action :set_balance, only: [:show, :edit, :update, :destroy]
    
     def index
-        @balance = Balance.all
+        @balances = Balance.all
     end
     
     def show

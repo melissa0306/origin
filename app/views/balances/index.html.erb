@@ -1,0 +1,21 @@
+<table>
+    <thread>
+        <tr>
+        <th>Username</th>
+        <th>Strecke</th>
+        <th>Datum</th>
+        </tr>
+    </thread>
+    
+    <tbody>
+        <% @balances.each do |balance| %>
+        <tr>
+            <% if balance.user == current_user %>
+            <td><%= balance.user.username%></td>
+            <td><%= balance.track_length%></td>
+            <td><%= balance.date%></td>
+            <% end %>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
