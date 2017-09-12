@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   
-  resources :balances
+  resources :balances do
+    member do
+      get :coefficient
+    end
+  end
+  
   root 'pages#index'
   
   
