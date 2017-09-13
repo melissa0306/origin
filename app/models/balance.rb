@@ -9,19 +9,19 @@ class Balance < ActiveRecord::Base
 
     def calculate_emission
         if  means_of_transport.to_s == "Auto"
-            self.emission = track_length.to_i * 150 
+            self.emission = track_length.to_i * 0.15 
         elsif means_of_transport.to_s == "Bahn"
-            self.emission = track_length.to_i * 40
+            self.emission = track_length.to_i * 0.04
         elsif means_of_transport.to_s == "Bus"
-            self.emission = track_length.to_i * 20
+            self.emission = track_length.to_i * 0.02
         elsif means_of_transport.to_s == "Fahrrad"
-            self.emission = track_length.to_i * 1
+            self.emission = 0
         elsif means_of_transport.to_s == "zu Fuß"
-            self.emission = track_length.to_i * 1
+            self.emission = 0
         elsif means_of_transport.to_s == "Elektro-PKW"
-            self.emission = track_length.to_i * 100
+            self.emission = track_length.to_i * 0.1
         else self.means_of_transport.to_s == "Elektro-PKW mit Ökostrom"
-            self.emission = track_length.to_i * 7
+            self.emission = track_length.to_i * 0.007
         end
     end
     

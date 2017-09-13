@@ -1,13 +1,18 @@
+<head>
 
+</head>
 
-<table>
+<body>
+<div class="table-responsive">
+  <table class="table">
+
     <thread>
         <tr>
-        <th>Username</th>
-        <th>Strecke</th>
-        <th>Datum</th>
-        <th>Transportmittel</th>
-        <th>CO2 Ausstoß</th>
+        <th><strong>Username </strong></th>
+        <th><strong>Strecke</strong></th>
+        <th><strong>Datum</strong></th>
+        <th><strong>Transportmittel</strong></th>
+        <th><strong>CO2 Ausstoß</strong></th>
         </tr>
     </thread>
     
@@ -15,18 +20,22 @@
         <% @balances.each do |balance| %>
         <tr>
             <% if balance.user == current_user %>
-            <td><%= balance.user.username%></td>
-            <td><%= balance.track_length%></td>
+            <td><%= balance.user.username %></td>
+            <td><%= balance.track_length %>
+            <%= "km" %></td>
             <td><%= balance.date%></td>
             <td><%= balance.means_of_transport%></td>
-            <td><%= balance.emission%></td>
+            <td><%= balance.emission%>
+            <%= "kg" %></td>
             <% end %>
         </tr>
         <% end %>
     </tbody>
+
 </table>
+</div>
 
 <%= used_transport%>
 <%= bilanz %>
-
+</body>
 
