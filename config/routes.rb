@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       get :coefficient
     end
   end
+
   
   root 'pages#index'
   

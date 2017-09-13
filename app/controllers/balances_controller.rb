@@ -8,6 +8,10 @@ class BalancesController < ApplicationController
    
     def index
         @balances = Balance.all
+        
+        respond_to do |format|
+            format.html
+        end
     end
     
     def show

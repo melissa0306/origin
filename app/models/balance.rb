@@ -24,5 +24,7 @@ class Balance < ActiveRecord::Base
             self.emission = track_length.to_i * 7
         end
     end
+    
+   
         
 end

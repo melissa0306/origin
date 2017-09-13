@@ -48,5 +48,7 @@ group :development do
   gem 'haml'
   gem 'simple_form'
   gem 'bootstrap-sass'
+  gem 'chartkick'
+  gem 'groupdate'
 end
 
