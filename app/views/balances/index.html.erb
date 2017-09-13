@@ -1,9 +1,12 @@
+
 <table>
     <thread>
         <tr>
         <th>Username</th>
         <th>Strecke</th>
         <th>Datum</th>
+        <th>Transportmittel</th>
+        <th>CO2 Ausstoß</th>
         </tr>
     </thread>
     
@@ -14,6 +17,8 @@
             <td><%= balance.user.username%></td>
             <td><%= balance.track_length%></td>
             <td><%= balance.date%></td>
+            <td><%= balance.means_of_transport%></td>
+            <td><%= balance.emission%></td>
             <% end %>
         </tr>
         <% end %>
