@@ -1,5 +1,5 @@
 <%= simple_form_for(@balance) do |f| %>
-<%= f.input :date, label: "Datum" %>
+<%= f.input :date, :order => [:day, :month, :year], label: "Datum" %>
 <%= f.input :track_length, label: "zurückgelegte Km" %>
 <%= f.input :means_of_transport, collection: @balance.means_of_transport_selection, label: "Select", include_blank: false %> 
 <%= f.submit %>

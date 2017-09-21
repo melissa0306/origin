@@ -1,41 +1,78 @@
-<head>
-
-</head>
 
 <body>
-<div class="table-responsive">
-  <table class="table">
+	<% content_for :title, "deine Bilanz" %>
+	<div class="container">
+		<div class="table-responsive">
+  			<table class="table">
+	    		<thread>
+	        		<tr>
+				        <th><strong>Username </strong></th>
+				        <th><strong>Strecke</strong></th>
+				        <th><strong>Datum</strong></th>
+				        <th><strong>Transportmittel</strong></th>
+				        <th><strong>CO2 Ausstoß</strong></th>
+	        		</tr>
+	    		</thread>
+	    
+	    		<tbody>
+	        		<% @balances.each do |balance| %>
+	        		<tr>
+	            		<% if balance.user == current_user %>
+	           				<td><%= balance.user.username %></td>
+	            			<td><%= balance.track_length %>
+	            				<%= "km" %></td>
+	            			<td><%= balance.date%></td>
+	            			<td><%= balance.means_of_transport%></td>
+	            			<td><%= balance.emission%>
+	            				<%= "kg" %></td>
+	            		<% end %>
+	        		</tr>
+	        		<% end %>
+	    		</tbody>
+			</table>
+		</div>
+		<div style="margin-top:50px">
+			<h3> Deine bevorzugten Transportmittel</h3>
+			<%= used_transport%>    
+		</div>
 
-    <thread>
-        <tr>
-        <th><strong>Username </strong></th>
-        <th><strong>Strecke</strong></th>
-        <th><strong>Datum</strong></th>
-        <th><strong>Transportmittel</strong></th>
-        <th><strong>CO2 Ausstoß</strong></th>
-        </tr>
-    </thread>
-    
-    <tbody>
-        <% @balances.each do |balance| %>
-        <tr>
-            <% if balance.user == current_user %>
-            <td><%= balance.user.username %></td>
-            <td><%= balance.track_length %>
-            <%= "km" %></td>
-            <td><%= balance.date%></td>
-            <td><%= balance.means_of_transport%></td>
-            <td><%= balance.emission%>
-            <%= "kg" %></td>
-            <% end %>
-        </tr>
-        <% end %>
-    </tbody>
-
-</table>
-</div>
-
-<%= used_transport%>
-<%= bilanz %>
+		<div style="margin-top:50px"> 
+			<h3> Dein CO2 Ausstoß im Zeitverlauf</h3>
+			<%= bilanz %>
+		</div>
+		
+		<div style="margin-top:50px"> 
+			<h3> Gesamtstrecke nach Transportmittel</h3>
+			<%=track_length_transport %>
+		</div>
+		
+		<div style="margin-top:50px"> 
+			<h3> Emission nach Transportmittel</h3>
+			<%= emission_transport %>
+		</div>
+		
+		<%= miez %>
+		
+			
+			<p> du hast <b><%=sum_track_length%></b> km zurückgelegt und dabei <b><%=sum_emission%> </b> kg CO2 ausgestoßen </p>	
+			<p> <%=butz %></p>
+			
+		
+			
+			<% if sum_auto >= sum_bahn + sum_bus %>
+				<p>Nutze den <b>öffentlichen Personennahverkehr</b> oder die<b> Bahn </b> anstelle des eigenen PKW </p>
+				<p>Auf vielen Strecken sparst du damit sogar Zeit und kannst die" Fahrzeit effektiv zum Arbeiten oder Entspannen nutzen!.</p>
+			<%else%>
+   				<p><b>Klasse!</b> du bevorzugst den öffentlichen Personennahverkehr deinem PKW und schohnst somit die Umwelt </p>
+			<%end%>
+		
+			<% if @balances.where(:user_id => current_user.id).select { |a| a.means_of_transport == "Auto" && a.track_length >= 5}.count > 0 %>
+            	<p>Versuche <b>kurze Strecken</b> zu Fuß oder mit dem Fahrrad zurückzulegen, das schont nicht nur die <b> Umwelt</b>, sondern auch deinen Geldbeutel.
+            	So kannst du <b> 0,10€ pro km</b> einsparen und  du tust deiner <b>Gesundheit</b> was Gutes!"</p>
+        	<%else%>
+            	<p><b>Super!</b> Du vermeidest kurze Strecken mit dem Auto zu fahren!</p>
+        	<%end%> 
+		</div>
+	</div>
 </body>
 

@@ -1,46 +1,35 @@
+<head>
+	<% content_for :title, "dein Profil" %>
+</head>
 
-<h2 class="major"><span>Dein Profil</span></h2>
-
-
-<ul class="divided"; style="margin-left:2.5em; padding-left:2.5em;">
+<body>
+	<div class="container">
+		<ul class="divided">
 	<li>
 		<article class="box post-summary">
 			<h3><a href="#">Username </a></h3>
 		</article>
 	</li>
-	<% if user_signed_in? %>
-         <%= current_user.username %>
-    <% else %>
-        <%= "du bist nicht eingeloggt" %>
-	<% end %>
+	  <%= current_user.username %>
 	
 	<li>
 		<article class="box post-summary">
 			<h3><a href="#">Geburtstag</a></h3>
 		</article>
 	</li>
-	<% if user_signed_in? %>
          <%= current_user.birthday %>
-    <% else %>
-        <%= "/" %>
-	<% end %>
-	
+  
 	<li>
 		<article class="box post-summary">
 			<h3><a href="#">Wohnort</a></h3>
 		</article>
 	</li>
-	<% if user_signed_in? %>
-         <%= current_user.place_of_residence %>
-    <% else %>
-        <%= "/" %>
-	<% end %>
-	
+	<%= current_user.place_of_residence %>
+  
 	<li>
-	<% if user_signed_in? %>
+	
 	    <%= link_to "bearbeiten", edit_user_registration_path %>
-	<% else %>
-	    <%= link_to "Account erstellen", new_user_registration_path %>
-	<% end %>
-	</li>
+
 </ul>
+</div>
+</body>

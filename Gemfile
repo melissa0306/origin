@@ -50,5 +50,6 @@ group :development do
   gem 'bootstrap-sass'
   gem 'chartkick'
   gem 'groupdate'
+  gem 'font-awesome-rails'
 end
 
