@@ -25,6 +25,7 @@
 	            			<td><%= balance.means_of_transport%></td>
 	            			<td><%= balance.emission%>
 	            				<%= "kg" %></td>
+	            			<td><%= link_to "Destroy", balance, method: :delete, data: { confirm: "Bist du dir sicher?" } %></td>
 	            		<% end %>
 	        		</tr>
 	        		<% end %>
@@ -41,17 +42,23 @@
 			<%= bilanz %>
 		</div>
 		
-		<div style="margin-top:50px"> 
-			<h3> Gesamtstrecke nach Transportmittel</h3>
-			<%=track_length_transport %>
+		<div style="width:100%;">
+			<div style="float:left; width:50%; margin-top:50px"> 
+				<h3> Gesamtstrecke nach Transportmittel</h3>
+				<%=track_length_transport %>
+			</div>
+			
+			<div style="float:right; width:50%; margin-top:50px"> 
+				<h3> Emission nach Transportmittel</h3>
+				<%= emission_transport %>
+			</div>
 		</div>
 		
 		<div style="margin-top:50px"> 
-			<h3> Emission nach Transportmittel</h3>
-			<%= emission_transport %>
+			<h3> So stehst du zum Durchschnitt</h3>
+			<%= comparison %>
 		</div>
 		
-		<%= miez %>
 		
 			
 			<p> du hast <b><%=sum_track_length%></b> km zurückgelegt und dabei <b><%=sum_emission%> </b> kg CO2 ausgestoßen </p>	

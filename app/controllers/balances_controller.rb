@@ -40,7 +40,7 @@ class BalancesController < ApplicationController
         end
     end
    
-     def update
+    def update
         respond_to do |format|
             if @balance.save
                 format.html {redirect_to @balance, notice: 'Daten wurden eingetragen'}
@@ -53,10 +53,8 @@ class BalancesController < ApplicationController
     end
     
     def destroy
-        respond_to do |format|
-            format.html {redirect_to balance_url, notice: 'Daten wurden gelöscht'}
-            format.json {head :no_content }
-        end
+        @balance.destroy
+        redirect_to balances_path
     end
     
     

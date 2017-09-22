@@ -12,19 +12,22 @@ module BalancesHelper
     
     # Säulendiagramm Gesamtstrecke von Fahrzeugen
     def track_length_transport
-        column_chart Balance.where(:user_id => current_user.id).group(:means_of_transport).sum(:track_length), xtitle: "Transportmittel", ytitle: "Strecke in km" ,colors: ["#06d370"]
+        column_chart Balance.where(:user_id => current_user.id).group(:means_of_transport).sum(:track_length), ytitle: "Strecke in km" ,colors: ["#06d370"], height: "500px"
     end
     
     # Säulendiagramm Emission von Fahrzeugen
     def emission_transport
-        column_chart Balance.where(:user_id => current_user.id).group(:means_of_transport).sum(:emission), xtitle: "Transportmittel", ytitle: "Emission", colors: ["#d12121"]
+        column_chart Balance.where(:user_id => current_user.id).group(:means_of_transport).sum(:emission), ytitle: "Emission", colors: ["#d12121"], height: "500px"
     end
     
-        
-    def miez
+    # Vergleich mit Durchschnitt    
+    def comparison
         column_chart [
-        {name: "Ich", data: "sum_emission / sum_track_length"},
-        {name: "Writing", data: "7"}] 
+        {name: "Ich", data: {"": sum_emission / sum_track_length}},
+        {name: "Durchschnitt", data: {"": "0.117115"}}
+        ],
+        width: "500px", height: "300px",
+        colors: ["#2fef1a", "#6c7687"]
     end
     
     # Summe von Strecke 
