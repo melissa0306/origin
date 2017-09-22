@@ -1,85 +1,250 @@
 
-<body>
-	<% content_for :title, "deine Bilanz" %>
-	<div class="container">
-		<div class="table-responsive">
-  			<table class="table">
-	    		<thread>
-	        		<tr>
-				        <th><strong>Username </strong></th>
-				        <th><strong>Strecke</strong></th>
-				        <th><strong>Datum</strong></th>
-				        <th><strong>Transportmittel</strong></th>
-				        <th><strong>CO2 Ausstoß</strong></th>
-	        		</tr>
-	    		</thread>
-	    
-	    		<tbody>
-	        		<% @balances.each do |balance| %>
-	        		<tr>
-	            		<% if balance.user == current_user %>
-	           				<td><%= balance.user.username %></td>
-	            			<td><%= balance.track_length %>
-	            				<%= "km" %></td>
-	            			<td><%= balance.date%></td>
-	            			<td><%= balance.means_of_transport%></td>
-	            			<td><%= balance.emission%>
-	            				<%= "kg" %></td>
-	            			<td><%= link_to "Destroy", balance, method: :delete, data: { confirm: "Bist du dir sicher?" } %></td>
-	            		<% end %>
-	        		</tr>
-	        		<% end %>
-	    		</tbody>
-			</table>
-		</div>
-		<div style="margin-top:50px">
-			<h3> Deine bevorzugten Transportmittel</h3>
-			<%= used_transport%>    
-		</div>
+<!DOCTYPE HTML>
+<!--
+	TXT by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<head>
+<% content_for :title, "Startseite" %>
+</head>
 
-		<div style="margin-top:50px"> 
-			<h3> Dein CO2 Ausstoß im Zeitverlauf</h3>
-			<%= bilanz %>
-		</div>
+<html>
+	<head>
+		<title>TXT by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/stylesheets/main.css" />
 		
-		<div style="width:100%;">
-			<div style="float:left; width:50%; margin-top:50px"> 
-				<h3> Gesamtstrecke nach Transportmittel</h3>
-				<%=track_length_transport %>
-			</div>
-			
-			<div style="float:right; width:50%; margin-top:50px"> 
-				<h3> Emission nach Transportmittel</h3>
-				<%= emission_transport %>
-			</div>
-		</div>
-		
-		<div style="margin-top:50px"> 
-			<h3> So stehst du zum Durchschnitt</h3>
-			<%= comparison %>
-		</div>
-		
-		
-			
-			<p> du hast <b><%=sum_track_length%></b> km zurückgelegt und dabei <b><%=sum_emission%> </b> kg CO2 ausgestoßen </p>	
-			<p> <%=butz %></p>
-			
-		
-			
-			<% if sum_auto >= sum_bahn + sum_bus %>
-				<p>Nutze den <b>öffentlichen Personennahverkehr</b> oder die<b> Bahn </b> anstelle des eigenen PKW </p>
-				<p>Auf vielen Strecken sparst du damit sogar Zeit und kannst die" Fahrzeit effektiv zum Arbeiten oder Entspannen nutzen!.</p>
-			<%else%>
-   				<p><b>Klasse!</b> du bevorzugst den öffentlichen Personennahverkehr deinem PKW und schohnst somit die Umwelt </p>
-			<%end%>
-		
-			<% if @balances.where(:user_id => current_user.id).select { |a| a.means_of_transport == "Auto" && a.track_length >= 5}.count > 0 %>
-            	<p>Versuche <b>kurze Strecken</b> zu Fuß oder mit dem Fahrrad zurückzulegen, das schont nicht nur die <b> Umwelt</b>, sondern auch deinen Geldbeutel.
-            	So kannst du <b> 0,10€ pro km</b> einsparen und  du tust deiner <b>Gesundheit</b> was Gutes!"</p>
-        	<%else%>
-            	<p><b>Super!</b> Du vermeidest kurze Strecken mit dem Auto zu fahren!</p>
-        	<%end%> 
-		</div>
-	</div>
-</body>
 
+
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body class="homepage">
+		<div id="page-wrapper">
+
+			
+
+			
+
+			<!-- Banner -->
+					<section id="banner">
+						<span class="image featured"><img src="/assets/banner.jpg" alt="" /></span>
+						<h2>Sputzibuh ist die Beste</h2>
+						<p>Die 1.0 ist definitiv gesichert!</p>
+						
+					</section>
+				</div>
+
+			<!-- Main -->
+				<div id="main-wrapper">
+					<div id="main" class="container">
+						<div class="row 200%">
+							<div class="12u">
+
+
+							</div>
+						</div>
+						<div class="row 50%">
+							<div class="12u">
+
+						<!-- About -->
+								<section>
+									<h2 class="major"><span>Worum geht es?</span></h2>
+									<p>
+										This is <strong>TXT</strong>, yet another free responsive site template designed by
+										<a href="http://twitter.com/ajlkn">AJ</a> for <a href="http://html5up.net">HTML5 UP</a>. It's released under the
+										<a href="http://html5up.net/license/">Creative Commons Attribution</a> license so feel free to use it for
+										whatever you're working on (personal or commercial), just be sure to give us credit for the design.
+										That's basically it :)
+									</p>
+								</section>
+
+						</div>
+					</div>
+					<div class="row 200%">
+						<div class="12u">
+
+								<!-- Features -->
+									<section class="box features">
+										<h2 class="major"><span>A BlaBla</span></h2>
+										<div>
+											<div class="row">
+												<div class="3u 12u(mobile)">
+
+													<!-- Feature -->
+														<section class="box feature">
+															<a href="https://emission-melissa0306.c9users.io/balances/profil" class="image featured"><img src="/assets/pic01.jpg" alt="" /></a>
+															<h3><a href="https://footprint-greenis-melissa0306.c9users.io/pages/profil">Profil</a></h3>
+															<p>
+																Phasellus quam turpis, feugiat sit amet ornare in, a hendrerit in
+																lectus dolore. Praesent semper mod quis eget sed etiam eu ante risus.
+															</p>
+														</section>
+
+												</div>
+												<div class="3u 12u(mobile)">
+
+													<!-- Feature -->
+														<section class="box feature">
+															<a href="https://emission-melissa0306.c9users.io/balances/new" class="image featured"><img src="/assets/pic02.jpg" alt="" /></a>
+															<h3><a href="https://footprint-greenis-melissa0306.c9users.io/pages/karte">Karte</a></h3>
+															<p>
+																Phasellus quam turpis, feugiat sit amet ornare in, a hendrerit in
+																lectus dolore. Praesent semper mod quis eget sed etiam eu ante risus.
+															</p>
+														</section>
+
+												</div>
+												<div class="3u 12u(mobile)">
+
+													<!-- Feature -->
+														<section class="box feature">
+															<a href="https://emission-melissa0306.c9users.io/balances/status" class="image featured"><img src="/assets/pic03.jpg" alt="" /></a>
+															<h3><a href="https://footprint-greenis-melissa0306.c9users.io/pages/vergleich">Bilanz</a></h3>
+															<p>
+																Phasellus quam turpis, feugiat sit amet ornare in, a hendrerit in
+																lectus dolore. Praesent semper mod quis eget sed etiam eu ante risus.
+															</p>
+														</section>
+
+												</div>
+												<div class="3u 12u(mobile)">
+
+													<!-- Feature -->
+														<section class="box feature">
+															<a href="https://emission-melissa0306.c9users.io/balances/analysis" class="image featured"><img src="/assets/pic04.jpg" alt="" /></a>
+															<h3><a href="https://footprint-greenis-melissa0306.c9users.io/pages/infos">Auswertung</a></h3>
+															<p>
+																Phasellus quam turpis, feugiat sit amet ornare in, a hendrerit in
+																lectus dolore. Praesent semper mod quis eget sed etiam eu ante risus.
+															</p>
+														</section>
+
+												</div>
+											</div>
+											<div class="row">
+												<div class="12u">
+													<ul class="actions">
+														<li><a href="#" class="button big">Do Something</a></li>
+														<li><a href="#" class="button alt big">Think About It</a></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</section>
+
+							</div>
+						</div>
+						<div class="row 200%">
+							<div class="12u">
+
+								<!-- Blog -->
+									<section class="box blog">
+										<h2 class="major"><span>Another Major Heading</span></h2>
+										<div>
+											<div class="row">
+												<div class="9u 12u(mobile)">
+													<div class="content content-left">
+
+														<!-- Featured Post -->
+															<article class="box post">
+																<header>
+																	<h3><a href="#">Here's a really big heading</a></h3>
+																	<p>With a smaller subtitle that attempts to elaborate</p>
+																	<ul class="meta">
+																		<li class="icon fa-clock-o">15 minutes ago</li>
+																		<li class="icon fa-comments"><a href="#">8</a></li>
+																	</ul>
+																</header>
+																<a href="#" class="image featured"><img src="/assets/pic05.jpg" alt="" /></a>
+																<p>
+																	Phasellus quam turpis, feugiat sit amet ornare in, a hendrerit in lectus. Praesent
+																	semper mod quis eget mi. Etiam sed ante risus aliquam erat et volutpat. Praesent a
+																	dapibus velit. Curabitur sed nisi nunc, accumsan vestibulum lectus. Lorem ipsum
+																	dolor sit non aliquet sed, tempor et dolor.  Praesent a dapibus velit. Curabitur
+																	accumsan.
+																</p>
+																<a href="#" class="button">Continue Reading</a>
+															</article>
+
+													</div>
+												</div>
+												<div class="3u 12u(mobile)">
+													<div class="sidebar">
+
+														<!-- Archives -->
+															<ul class="divided">
+																<li>
+																	<article class="box post-summary">
+																		<h3><a href="#">A Subheading</a></h3>
+																		<ul class="meta">
+																			<li class="icon fa-clock-o">6 hours ago</li>
+																			<li class="icon fa-comments"><a href="#">34</a></li>
+																		</ul>
+																	</article>
+																</li>
+																<li>
+																	<article class="box post-summary">
+																		<h3><a href="#">Another Subheading</a></h3>
+																		<ul class="meta">
+																			<li class="icon fa-clock-o">9 hours ago</li>
+																			<li class="icon fa-comments"><a href="#">27</a></li>
+																		</ul>
+																	</article>
+																</li>
+																<li>
+																	<article class="box post-summary">
+																		<h3><a href="#">And Another</a></h3>
+																		<ul class="meta">
+																			<li class="icon fa-clock-o">Yesterday</li>
+																			<li class="icon fa-comments"><a href="#">184</a></li>
+																		</ul>
+																	</article>
+																</li>
+																<li>
+																	<article class="box post-summary">
+																		<h3><a href="#">And Another</a></h3>
+																		<ul class="meta">
+																			<li class="icon fa-clock-o">2 days ago</li>
+																			<li class="icon fa-comments"><a href="#">286</a></li>
+																		</ul>
+																	</article>
+																</li>
+																<li>
+																	<article class="box post-summary">
+																		<h3><a href="#">And One More</a></h3>
+																		<ul class="meta">
+																			<li class="icon fa-clock-o">3 days ago</li>
+																			<li class="icon fa-comments"><a href="#">8,086</a></li>
+																		</ul>
+																	</article>
+																</li>
+															</ul>
+															<a href="#" class="button alt">Browse Archives</a>
+
+													</div>
+												</div>
+											</div>
+										</div>
+									</section>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+		
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/skel-viewport.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

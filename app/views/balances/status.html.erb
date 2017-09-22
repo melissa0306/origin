@@ -1,0 +1,44 @@
+
+<body>
+	<% content_for :title, "deine Bilanz" %>
+	<div class="container">
+		
+		<div> 
+			<h3> Dein CO2 Ausstoß im Zeitverlauf</h3>
+			<%= bilanz %>
+		</div>
+		
+		<div style="margin-top:150px", class="table-responsive">
+			<h3> Dein Protokoll</h3>
+  			<table class="table">
+	    		<thread>
+	        		<tr>
+				        <th><strong>Username </strong></th>
+				        <th><strong>Strecke</strong></th>
+				        <th><strong>Datum</strong></th>
+				        <th><strong>Transportmittel</strong></th>
+				        <th><strong>CO2 Ausstoß</strong></th>
+	        		</tr>
+	    		</thread>
+	    
+	    		<tbody>
+	        		<% @balances.each do |balance| %>
+	        		<tr>
+	            		<% if balance.user == current_user %>
+	           				<td><%= balance.user.username %></td>
+	            			<td><%= balance.track_length %>
+	            				<%= "km" %></td>
+	            			<td><%= balance.date%></td>
+	            			<td><%= balance.means_of_transport%></td>
+	            			<td><%= balance.emission%>
+	            				<%= "kg" %></td>
+	            			<td><%= link_to "Destroy", balance, method: :delete, data: { confirm: "Bist du dir sicher?" } %></td>
+	            		<% end %>
+	        		</tr>
+	        		<% end %>
+	    		</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+

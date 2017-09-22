@@ -17,16 +17,17 @@ module BalancesHelper
     
     # Säulendiagramm Emission von Fahrzeugen
     def emission_transport
-        column_chart Balance.where(:user_id => current_user.id).group(:means_of_transport).sum(:emission), ytitle: "Emission", colors: ["#d12121"], height: "500px"
+        column_chart Balance.where(:user_id => current_user.id).group(:means_of_transport).sum(:emission), ytitle: "Emission in kg", colors: ["#d12121"], height: "500px"
     end
     
     # Vergleich mit Durchschnitt    
     def comparison
         column_chart [
         {name: "Ich", data: {"": sum_emission / sum_track_length}},
-        {name: "Durchschnitt", data: {"": "0.117115"}}
+        {name: "Durchschnitt", data: {"": "0.13257"}}
         ],
         width: "500px", height: "300px",
+        ytitle: "kg/km",
         colors: ["#2fef1a", "#6c7687"]
     end
     
@@ -44,10 +45,6 @@ module BalancesHelper
     def average_track_length
         Balance.where(:user_id => current_user.id , :means_of_transport => "Auto").average(:track_length)
     end
-    
-    #def testen
-     #   User.joins(:balances).group("username").order("SUM(balances.emission) DESC").first (10)
-    #end
     
     # Vergleich mit Durchschnitt
     def butz

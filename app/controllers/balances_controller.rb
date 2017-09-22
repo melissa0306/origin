@@ -1,10 +1,30 @@
 class BalancesController < ApplicationController
     before_action :set_balance, only: [:show, :edit, :update, :destroy]
-    before_action :authenticate_user!, except: [:show, :destroy]
+    before_action :authenticate_user!, except: [:show, :destroy, :index]
    
-    
+    def status
+         @balances = Balance.all
+        
+        respond_to do |format|
+            format.html
+        end
+    end
    
+    def profil
+        @balances = Balance.all
+        
+        respond_to do |format|
+            format.html
+        end
+    end
     
+    def analysis
+        @balances = Balance.all
+        
+        respond_to do |format|
+            format.html
+        end
+    end
    
     def index
         @balances = Balance.all

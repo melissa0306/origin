@@ -1,0 +1,57 @@
+<head>
+	<% content_for :title, "Deine Auswertung" %>
+</head>
+
+<body>
+    <div class="container">
+        <div>
+            <font size="+1">
+                
+            	<p> du hast <b><%=sum_track_length%></b> km zurückgelegt und dabei <b><%=sum_emission%> </b> kg CO2 ausgestoßen </p>	
+    			<p> <%=butz %></p>
+    			
+    		
+    			<% if sum_auto >= sum_bahn + sum_bus %>
+    				<p>Nutze den <b>öffentlichen Personennahverkehr</b> oder die<b> Bahn </b> anstelle des eigenen PKW </p>
+    				<p>Auf vielen Strecken sparst du damit sogar Zeit und kannst die" Fahrzeit effektiv zum Arbeiten oder Entspannen nutzen!.</p>
+    			<%else%>
+       				<p><b>Klasse!</b> du bevorzugst den öffentlichen Personennahverkehr deinem PKW und schohnst somit die Umwelt </p>
+    			<%end%>
+    		
+    			<% if @balances.where(:user_id => current_user.id).select { |a| a.means_of_transport == "Auto" && a.track_length >= 5}.count > 0 %>
+                	<p>Versuche <b>kurze Strecken</b> zu Fuß oder mit dem Fahrrad zurückzulegen, das schont nicht nur die <b> Umwelt</b>, sondern auch deinen Geldbeutel.
+                	So kannst du <b> 0,10€ pro km</b> einsparen und  du tust deiner <b>Gesundheit</b> was Gutes!"</p>
+            	<%else%>
+                	<p><b>Super!</b> Du vermeidest kurze Strecken mit dem Auto zu fahren!</p>
+            	<%end%>
+        	</font>
+        </div>
+        
+        <div style="margin-top:50px">
+			<h3> Deine bevorzugten Transportmittel</h3>
+			<%= used_transport%>    
+		</div>
+
+
+		
+		<div style="width:100%;">
+			<div style="float:left; width:50%; margin-top:50px"> 
+				<h3> Gesamtstrecke nach Transportmittel</h3>
+				<%=track_length_transport %>
+			</div>
+			
+			<div style="float:right; width:50%; margin-top:50px"> 
+				<h3> Emission nach Transportmittel</h3>
+				<%= emission_transport %>
+			</div>
+		</div>
+		
+		<div style="margin-top:50px"> 
+			<h3> So stehst du zum Durchschnitt</h3>
+			<%= comparison %>
+		</div>
+		
+		
+		
+    </div>
+</body>

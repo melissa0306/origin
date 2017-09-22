@@ -1,25 +1,24 @@
 Rails.application.routes.draw do
   
-  resources :balances 
+  get 'balances/status'
+  resources :balances do
+    collection do
+      get :status
+      get :profil
+      get :analysis
+    end
+  end 
 
 
   
-  root 'pages#index'
+  root 'balances#index'
   
   
   devise_for :users
  
-  
-  get 'pages/infos'
-  get 'pages/vergleich'
-  get 'pages/karte'
-  get 'pages/profil'
-  get 'pages/index'
-  
 
   get 'balances/index' => 'balances#index'
   get 'balances/new' => 'balances#new'
-
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
