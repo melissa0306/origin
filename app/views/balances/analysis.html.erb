@@ -6,52 +6,69 @@
     <div class="container">
         <div>
             <font size="+1">
-                
-            	<p> du hast <b><%=sum_track_length%></b> km zurückgelegt und dabei <b><%=sum_emission%> </b> kg CO2 ausgestoßen </p>	
-    			<p> <%=butz %></p>
+        		<h3> So stehst du zum Durchschnitt</h3>
+        		
+				<div style="float:left; width:50%; margin-top:50px"> 
+           			<p> Du hast <b><%=sum_track_length%></b> km zurückgelegt und dabei <b><%=sum_emission%> </b> kg CO2 ausgestoßen.	
+					<br> Damit liegst du <b><%=vergleich %></b> dem Durchschnitt. </p>
+				</div>
+				
+				<div style="float:right; width:50%; margin-top:50px"> 
+					<%= comparison %>
+				</div>
+				
+				<p style="clear:both;"></p>
+				
+			<h3> Deine bevorzugten Transportmittel</h3>	
+				
+				<div style="float:left; width:50%; margin-top:50px"> 
+	    		<%= used_transport%>    
+
+	    		</div>
+	    		
+	    		<div style="float:right; width:50%; margin-top:50px"> 
+	    			<% if sum_auto >= sum_bahn + sum_bus %>
+	    				<p>Du bevorzugst es mit dem Auto zu fahren. Nutze den <b>öffentlichen Personennahverkehr</b> oder die<b> Bahn </b> anstelle des eigenen PKW <br>
+	    				Auf vielen Strecken sparst du damit sogar Zeit und kannst die Fahrzeit <b>effektiv</b> zum Arbeiten oder Entspannen nutzen!</p>
+	    			<%else%>
+	       				<p><b>Klasse!</b> du bevorzugst den öffentlichen Personennahverkehr deinem PKW und schohnst somit die Umwelt </p>
+	    			<%end%>
+	    		</div>
+	    		
+    			<p style="clear:both;"></p>
     			
-    		
-    			<% if sum_auto >= sum_bahn + sum_bus %>
-    				<p>Nutze den <b>öffentlichen Personennahverkehr</b> oder die<b> Bahn </b> anstelle des eigenen PKW </p>
-    				<p>Auf vielen Strecken sparst du damit sogar Zeit und kannst die" Fahrzeit effektiv zum Arbeiten oder Entspannen nutzen!.</p>
-    			<%else%>
-       				<p><b>Klasse!</b> du bevorzugst den öffentlichen Personennahverkehr deinem PKW und schohnst somit die Umwelt </p>
-    			<%end%>
-    		
-    			<% if @balances.where(:user_id => current_user.id).select { |a| a.means_of_transport == "Auto" && a.track_length >= 5}.count > 0 %>
+    			<h3> Gesamtstrecke nach Transportmittel</h3>
+				<div style="float:left; width:50%; margin-top:50px"> 
+					<%=track_length_transport %>
+				</div>
+			
+			
+				<div style="float:right; width:50%; margin-top:50px"> 
+			      	<p> Mit dem <b> Auto </b> legst du im Durchscnitt eine Strecke von <b> <%= durchschnitt_auto %> km </b> zurück. <br>
+			      	<% if anzahl_auto > 5 %>
                 	<p>Versuche <b>kurze Strecken</b> zu Fuß oder mit dem Fahrrad zurückzulegen, das schont nicht nur die <b> Umwelt</b>, sondern auch deinen Geldbeutel.
                 	So kannst du <b> 0,10€ pro km</b> einsparen und  du tust deiner <b>Gesundheit</b> was Gutes!"</p>
             	<%else%>
                 	<p><b>Super!</b> Du vermeidest kurze Strecken mit dem Auto zu fahren!</p>
             	<%end%>
-        	</font>
-        </div>
-        
-        <div style="margin-top:50px">
-			<h3> Deine bevorzugten Transportmittel</h3>
-			<%= used_transport%>    
-		</div>
-
-
-		
-		<div style="width:100%;">
-			<div style="float:left; width:50%; margin-top:50px"> 
-				<h3> Gesamtstrecke nach Transportmittel</h3>
-				<%=track_length_transport %>
-			</div>
-			
+			      		<b> Öffentliche Transportmittel </b> nutzt du bei Fahrten von <b> <%= durchschnitt_öffentlich %> km </b> Länge. <br>
+			      		<b> Zu Fuß </b> oder mit dem <b> Fahrrad </b> legst du durchschnittlich eine Strecke von <b> <%= durchschnitt_fuss %> km </b> zurück.
+			      	</p> 
+				</div>
+				<p style="clear:both;"></p>
+				
 			<div style="float:right; width:50%; margin-top:50px"> 
 				<h3> Emission nach Transportmittel</h3>
 				<%= emission_transport %>
 			</div>
-		</div>
-		
-		<div style="margin-top:50px"> 
-			<h3> So stehst du zum Durchschnitt</h3>
-			<%= comparison %>
-		</div>
-		
-		
-		
+	
+			<%= [sum_auto, sum_bahn].max %>
+				
+        	
+        	
+        	</font>
+        </div>
+        
+        
     </div>
 </body>

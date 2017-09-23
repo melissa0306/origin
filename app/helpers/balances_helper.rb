@@ -47,11 +47,11 @@ module BalancesHelper
     end
     
     # Vergleich mit Durchschnitt
-    def butz
+    def vergleich
         if sum_emission / sum_track_length  > 0.117115
-            "du liegst über dem Durchschnitt"
+            "über"
         else 
-            "du liegst unter dem Durchschnitt"
+            "unter"
         end
     end 
     
@@ -78,6 +78,22 @@ module BalancesHelper
         @balances.where(:user_id => current_user.id , :means_of_transport => "Auto").sum(:track_length)
     end 
     
+    def durchschnitt_auto
+        @balances.where(:user_id => current_user.id , :means_of_transport => "Auto").average(:track_length)
+    end
     
-      
+    def durchschnitt_öffentlich
+        @balances.where(:user_id => current_user.id , :means_of_transport => "Auto" && "Bus").average(:track_length)
+    end  
+    
+    def durchschnitt_fuss
+        @balances.where(:user_id => current_user.id , :means_of_transport => "Fahrrad" && "zu Fuß").average(:track_length)
+    end
+    
+    def self.median(column_name)
+        median_index = (count / 2)
+        # order by the given column and pluck out the value exactly halfway
+        order(column_name).offset(median_index).limit(1).pluck(column_name)[0]
+    end
+    
 end
