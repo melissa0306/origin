@@ -60,40 +60,137 @@ module BalancesHelper
         @balances.where(:user_id => current_user.id).select { |a| a.means_of_transport == "Auto" && a.track_length >= 5}.count
     end
     
-    # Anzahl fahrten je nach Fahrzeug
+# Anzahl fahrten je nach Fahrzeug
     def sum_auto
         @balances.where(:user_id => current_user.id).select { |a| a.means_of_transport == "Auto"}.count
     end
     
-    def sum_bahn
-        @balances.where(:user_id => current_user.id).select { |b| b.means_of_transport == "Bahn"}.count
+    def sum_bahn_fern
+        @balances.where(:user_id => current_user.id).select { |b| b.means_of_transport == "Bahn-Fernverkehr"}.count
+    end
+
+    def sum_bahn_nah
+        @balances.where(:user_id => current_user.id).select { |b| b.means_of_transport == "Bahn-Nahverkehr"}.count
     end
     
-    def sum_bus
-        @balances.where(:user_id => current_user.id).select { |c| c.means_of_transport == "Bus"}.count
+    def sum_reisebus
+        @balances.where(:user_id => current_user.id).select { |c| c.means_of_transport == "Reisebus"}.count
     end
     
-    #  mit Auto zurückgelegte Strecke   
+    def sum_linienbus
+        @balances.where(:user_id => current_user.id).select { |c| c.means_of_transport == "Linienbus"}.count
+    end
+    
+    def sum_fahrrad
+        @balances.where(:user_id => current_user.id).select { |c| c.means_of_transport == "Fahrrad"}.count
+    end
+    
+    def sum_zu_fuß
+        @balances.where(:user_id => current_user.id).select { |c| c.means_of_transport == "zu Fuß"}.count
+    end
+    
+    def sum_elektro
+        @balances.where(:user_id => current_user.id).select { |c| c.means_of_transport == "Elektro-PKW"}.count
+    end
+        
+#  mit Fahrzeug zurückgelegte Strecke   
     def track_length_auto
         @balances.where(:user_id => current_user.id , :means_of_transport => "Auto").sum(:track_length)
     end 
     
+    def track_length_linienbus
+        @balances.where(:user_id => current_user.id , :means_of_transport => "Linienbus").sum(:track_length)
+    end 
+    
+    def track_length_reisebus
+        @balances.where(:user_id => current_user.id , :means_of_transport => "Reisebus").sum(:track_length)
+    end 
+    
+    def track_length_bahn_nah
+        @balances.where(:user_id => current_user.id , :means_of_transport => "Bahn-Nahverkehr").sum(:track_length)
+    end 
+
+    def track_length_bahn_fern
+        @balances.where(:user_id => current_user.id , :means_of_transport => "Bahn-Fernverkehr").sum(:track_length)
+    end
+    
+    def track_length_zu_fuß
+        @balances.where(:user_id => current_user.id , :means_of_transport => "zu Fuß").sum(:track_length)
+    end 
+    
+    def track_length_fahrrad
+        @balances.where(:user_id => current_user.id , :means_of_transport => "Fahrrad").sum(:track_length)
+    end 
+    
+    def track_length_elektro
+        @balances.where(:user_id => current_user.id , :means_of_transport => "Elektro-PKW").sum(:track_length)
+    end 
+    
+    # Emission Auto
+    def emission_auto
+        @balances.where(:user_id => current_user.id , :means_of_transport => "Auto").sum(:emission)
+    end
+
+    # Durchschnitt Strecke mit Auto     
     def durchschnitt_auto
         @balances.where(:user_id => current_user.id , :means_of_transport => "Auto").average(:track_length)
     end
     
+    # Durchschnitt Strecke mit öffentlichen Transport
     def durchschnitt_öffentlich
-        @balances.where(:user_id => current_user.id , :means_of_transport => "Auto" && "Bus").average(:track_length)
+        @balances.where(:user_id => current_user.id , :means_of_transport => "Bahn-Fernverkehr" && "Bahn-Nahverkehr" && "Reisebus" && "Linienbus").average(:track_length)
     end  
     
+    # Durchschnitt Strecke zu Fuß
     def durchschnitt_fuss
         @balances.where(:user_id => current_user.id , :means_of_transport => "Fahrrad" && "zu Fuß").average(:track_length)
     end
     
-    def self.median(column_name)
-        median_index = (count / 2)
-        # order by the given column and pluck out the value exactly halfway
-        order(column_name).offset(median_index).limit(1).pluck(column_name)[0]
+    # Meistgenutztes Fahrzeug
+    def max_anzahl
+        maxi = [sum_auto, sum_linienbus, sum_reisebus, sum_bahn_fern, sum_bahn_nah, sum_zu_fuß, sum_fahrrad, sum_elektro].max
+        case maxi
+        when sum_auto
+            "das Auto"
+        when sum_linienbus
+            "der Linienbus"
+        when sum_reisebus
+            "der Reisebus"
+        when sum_bahn_nah
+            "die Bahn"
+        when sum_bahn_fern
+            "die Bahn"
+        when sum_zu_fuß
+            "zu Fuß"
+        when sum_fahrrad
+            "das Fahrrad"
+        else
+            "der Elektro-PKW"
+        end
     end
+    
+    # Fahrzeug mit höchster Streckenlänge
+    def max_strecke
+        maxi = [track_length_auto, track_length_bahn_fern, track_length_bahn_nah,
+        track_length_linienbus, track_length_reisebus, track_length_fahrrad, track_length_zu_fuß, track_length_elektro].max
+        case maxi
+        when track_length_auto
+            "dem Auto"
+        when track_length_linienbus
+            "dem Linienbus"
+        when track_length_reisebus
+            "dem Reisebus"
+        when track_length_bahn_fern
+            "der Bahn"
+        when track_length_bahn_nah
+            "der Bahn"
+        when track_length_zu_fuß
+            "zu Fuß"
+        when track_length_fahrrad
+            "dem Fahrrad"
+        else
+            "dem Elektro-PKW"
+        end
+    end  
     
 end
