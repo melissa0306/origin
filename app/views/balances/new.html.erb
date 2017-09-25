@@ -3,19 +3,23 @@
 </head>
 
 <body>
-    <div class="container">
+  <div class="container">
+  <div style="float:right; width:40%; margin-top:0px"> 
+  <h1>Emission eintragen</h1>
         <%= render 'form' %>
         <%=link_to "Cancel", root_path %>
-    
     </div>
-</body>
+    
+   
 
 
 
+<div style="float:left; width:50%; margin-top:0px"> 
+<h1>Strecke berechnen </h1>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
-<body>
+
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB5W_6riR6Y5CvnJV30QeatPugzrTd3zSs&sensor=false&libraries=places"></script>
     <script type="text/javascript">
     
@@ -29,7 +33,7 @@
             directionsDisplay = new google.maps.DirectionsRenderer({ 'draggable': true });
         });
 
-        function GetRoute() {
+        function Auto() {
             var goett = new google.maps.LatLng(51.5412, 9.9158);
             var mapOptions = {
                 zoom: 14,
@@ -67,9 +71,9 @@
                 if (status == google.maps.DistanceMatrixStatus.OK && response.rows[0].elements[0].status != "ZERO_RESULTS") {
                     var distance = response.rows[0].elements[0].distance.text;
                     var duration = response.rows[0].elements[0].duration.text;
-               //     var dvDistance = document.getElementById("dvDistance");
-               //     dvDistance.innerHTML = "";
-               //     dvDistance.innerHTML += "Distance: " + distance + "<br />";
+                    var dvDistance = document.getElementById("dvDistance");
+                   dvDistance.innerHTML = "";
+                   dvDistance.innerHTML += "Strecke: " + distance + "<br />";
                //     dvDistance.innerHTML += "Duration: " + duration;
 			   
                 } else {
@@ -79,18 +83,120 @@
         }
         
         
+        
+        function ZuFuß() {
+            var goett = new google.maps.LatLng(51.5412, 9.9158);
+            var mapOptions = {
+                zoom: 14,
+                center: goett
+            };
+            map = new google.maps.Map(document.getElementById('dvMap'), mapOptions);
+            directionsDisplay.setMap(map);
+            directionsDisplay.setPanel(document.getElementById('dvPanel'));
+
+            //*********DIRECTIONS AND ROUTE**********************//
+            source = document.getElementById("txtSource").value;
+            destination = document.getElementById("txtDestination").value;
+
+            var request = {
+                origin: source,
+                destination: destination,
+                travelMode: google.maps.TravelMode.WALKING
+            };
+            directionsService.route(request, function (response, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                    directionsDisplay.setDirections(response);
+                }
+            });
+
+            //*********DISTANCE AND DURATION**********************//
+            var service = new google.maps.DistanceMatrixService();
+            service.getDistanceMatrix({
+                origins: [source],
+                destinations: [destination],
+                travelMode: google.maps.TravelMode.WALKING,
+                unitSystem: google.maps.UnitSystem.METRIC,
+                avoidHighways: false,
+                avoidTolls: false
+            }, function (response, status) {
+                if (status == google.maps.DistanceMatrixStatus.OK && response.rows[0].elements[0].status != "ZERO_RESULTS") {
+                    var distance = response.rows[0].elements[0].distance.text;
+                    var duration = response.rows[0].elements[0].duration.text;
+                    var dvDistance = document.getElementById("dvDistance");
+                   dvDistance.innerHTML = "";
+                   dvDistance.innerHTML += "Strecke: " + distance + "<br />";
+               //     dvDistance.innerHTML += "Duration: " + duration;
+			   
+                } else {
+                    alert("Unable to find the distance via road.");
+                }
+            });
+        }
+        
+        
+        function MitBus() {
+            var goett = new google.maps.LatLng(51.5412, 9.9158);
+            var mapOptions = {
+                zoom: 14,
+                center: goett
+            };
+            map = new google.maps.Map(document.getElementById('dvMap'), mapOptions);
+            directionsDisplay.setMap(map);
+            directionsDisplay.setPanel(document.getElementById('dvPanel'));
+
+            //*********DIRECTIONS AND ROUTE**********************//
+            source = document.getElementById("txtSource").value;
+            destination = document.getElementById("txtDestination").value;
+
+            var request = {
+                origin: source,
+                destination: destination,
+                travelMode: google.maps.TravelMode.TRANSIT
+            };
+            directionsService.route(request, function (response, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                    directionsDisplay.setDirections(response);
+                }
+            });
+
+            //*********DISTANCE AND DURATION**********************//
+            var service = new google.maps.DistanceMatrixService();
+            service.getDistanceMatrix({
+                origins: [source],
+                destinations: [destination],
+                travelMode: google.maps.TravelMode.TRANSIT,
+                unitSystem: google.maps.UnitSystem.METRIC,
+                avoidHighways: false,
+                avoidTolls: false
+            }, function (response, status) {
+                if (status == google.maps.DistanceMatrixStatus.OK && response.rows[0].elements[0].status != "ZERO_RESULTS") {
+                    var distance = response.rows[0].elements[0].distance.text;
+                    var duration = response.rows[0].elements[0].duration.text;
+                    var dvDistance = document.getElementById("dvDistance");
+                   dvDistance.innerHTML = "";
+                   dvDistance.innerHTML += "Strecke: " + distance;
+               //     dvDistance.innerHTML += "Duration: " + duration;
+			   
+                } else {
+                    alert("Unable to find the distance via road.");
+                }
+            });
+        }
+        
     </script>
     <table border="0" cellpadding="0" cellspacing="3">
         <tr>
             <td colspan="2">
-                Source:
+                <p> <b> Strart: </b>
                 <input type="text" id="txtSource" value="Hauptbahnhof, Göttingen, Deutschland" style="width: 300px" />
-                &nbsp; Destination:
+                <br> &nbsp; <b> Ziel: </b>
                 <input type="text" id="txtDestination" value="Platz der Göttingern Sieben, Göttingen, Deutschland" style="width: 300px" />
-                <br />
-                <br />
-                <input type="button" value="Get Route" onclick="GetRoute()" />
-                <hr />
+                </p>
+               
+                <input type="button" value="Auto" onclick="Auto()" />
+                <input type="button" value="Zu Fuß" onclick="ZuFuß()" />
+                <input type="button" value="Bus" onclick="MitBus()" />
+                
             </td>
         </tr>
         <tr>
@@ -101,7 +207,7 @@
         </tr>
         <tr>
             <td>
-                <div id="dvMap" style="width: 1000px; height: 600px">
+                <div id="dvMap" style="width: 600px; height: 400px">
                 </div>
                  <div id="dvPanel" style="width: 700px; height: 700px">
                 </div>
@@ -110,5 +216,7 @@
         </tr>
     </table>
     <br />
+    </div>
+    </div>
 </body>
 </html>

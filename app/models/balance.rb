@@ -23,7 +23,7 @@ class Balance < ActiveRecord::Base
         elsif means_of_transport.to_s == "zu Fuß"
             self.emission = 0
         elsif means_of_transport.to_s == "Elektro-PKW"
-            self.emission = track_length.to_i * 0.106
+            self.emission = track_length.to_i * 0.072
         end
     end
     
