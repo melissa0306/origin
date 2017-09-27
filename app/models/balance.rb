@@ -15,9 +15,9 @@ class Balance < ActiveRecord::Base
         elsif means_of_transport.to_s == "Linienbus"
             self.emission = track_length.to_i * 0.076
         elsif means_of_transport.to_s == "Reisebus"
-            self.emission = 0.032
+            self.emission = track_length.to_i * 0.032
         elsif means_of_transport.to_s == "Bahn-Nahverkehr"
-            self.emission = 0.067
+            self.emission = track_length.to_i * 0.067
         elsif means_of_transport.to_s == "Fahrrad"
             self.emission = 0
         elsif means_of_transport.to_s == "zu Fuß"

@@ -10,7 +10,7 @@
         		
 				<div style="float:left; width:50%; margin-top:50px"> 
            			<p> Du hast <b><%=sum_track_length%></b> km zurückgelegt und dabei <b><%=sum_emission%> </b> kg CO2 ausgestoßen.	
-					<br> Damit liegst du <b><%=vergleich %></b> dem Durchschnitt. </p>
+					<br> Damit liegst du <b><%=vergleich %></b> dem Durchschnitt und <b><%=vergleich2020 %></b> dem Ziel für 2020.</p>
 				</div>
 				
 				<div style="float:right; width:50%; margin-top:50px"> 
@@ -52,11 +52,11 @@
 					<%end %>
 			      	<p> Mit dem <b> Auto </b> legst du im Durchschnitt eine Strecke von <b> <%= durchschnitt_auto %> km </b> zurück. <br>
 			      	<% if anzahl_auto > 5 %>
-                	<p>Versuche <b>kurze Strecken</b> zu Fuß oder mit dem Fahrrad zurückzulegen, das schont nicht nur die <b> Umwelt</b>, sondern auch deinen Geldbeutel.
-                	So kannst du <b> 0,10€ pro km</b> einsparen und  du tust deiner <b>Gesundheit</b> was Gutes!"</p>
-            	<%else%>
-                	<p><b>Super!</b> Du vermeidest kurze Strecken mit dem Auto zu fahren!</p>
-            	<%end%>
+                		<p>Versuche <b>kurze Strecken</b> zu Fuß oder mit dem Fahrrad zurückzulegen, das schont nicht nur die <b> Umwelt</b>, sondern auch deinen Geldbeutel.
+                		So kannst du <b> 0,10€ pro km</b> einsparen und  du tust deiner <b>Gesundheit</b> was Gutes!"</p>
+            		<%else%>
+                		<p><b>Super!</b> Du vermeidest kurze Strecken mit dem Auto zu fahren!</p>
+            		<%end%>
 			      		<b> Öffentliche Transportmittel </b> nutzt du bei Fahrten von <b> <%= durchschnitt_öffentlich %> km </b> Länge. <br>
 			      		<b> Zu Fuß </b> oder mit dem <b> Fahrrad </b> legst du durchschnittlich eine Strecke von <b> <%= durchschnitt_fuss %> km </b> zurück.
 			      	</p> 

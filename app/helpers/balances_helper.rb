@@ -23,12 +23,13 @@ module BalancesHelper
     # Vergleich mit Durchschnitt    
     def comparison
         column_chart [
-        {name: "Ich", data: {"": sum_emission / sum_track_length}},
-        {name: "Durchschnitt", data: {"": "0.13257"}}
+        {name: "Ich", data: {"": sum_emission}},
+        {name: "Durchschnitt", data: {"": "2655"}},
+        {name: "Ziel für 2020", data: {"": "1593"}}
         ],
         width: "500px", height: "300px",
-        ytitle: "kg/km",
-        colors: ["#2fef1a", "#6c7687"]
+        ytitle: "kg/Jahr",
+        colors: ["#2fef1a", "#6c7687" , "#caccc7"]
     end
     
     # Summe von Strecke 
@@ -48,7 +49,15 @@ module BalancesHelper
     
     # Vergleich mit Durchschnitt
     def vergleich
-        if sum_emission / sum_track_length  > 0.117115
+        if sum_emission   > 2655
+            "über"
+        else 
+            "unter"
+        end
+    end 
+    
+    def vergleich2020
+        if sum_emission   > 1593
             "über"
         else 
             "unter"
@@ -57,7 +66,7 @@ module BalancesHelper
     
     # Anzahl an Autofahrten unter einer Strecke von 5km        
     def anzahl_auto
-        @balances.where(:user_id => current_user.id).select { |a| a.means_of_transport == "Auto" && a.track_length >= 5}.count
+        @balances.where(:user_id => current_user.id).select { |a| a.means_of_transport == "Auto" && a.track_length <= 5}.count
     end
     
 # Anzahl fahrten je nach Fahrzeug

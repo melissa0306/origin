@@ -74,7 +74,7 @@ class BalancesController < ApplicationController
     
     def destroy
         @balance.destroy
-        redirect_to balances_path
+        redirect_to status_balances_path
     end
     
     
