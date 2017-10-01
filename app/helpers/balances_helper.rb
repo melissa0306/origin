@@ -20,16 +20,29 @@ module BalancesHelper
         column_chart Balance.where(:user_id => current_user.id).group(:means_of_transport).sum(:emission), ytitle: "Emission in kg", colors: ["#d12121"], height: "500px"
     end
     
-    # Vergleich mit Durchschnitt    
+    # Vergleich Gesamte Emission mit Durchschnitt    
     def comparison
         column_chart [
         {name: "Ich", data: {"": sum_emission}},
-        {name: "Durchschnitt", data: {"": "2655"}},
-        {name: "Ziel für 2020", data: {"": "1593"}}
+        {name: "Durchschnitt", data: {"": "2190"}},
+        {name: "Durchschnitt Wohnort", data: {"": vergleich_wohnort}},
+        {name: "Unser Ziel", data: {"": "1752"}}
         ],
         width: "500px", height: "300px",
         ytitle: "kg/Jahr",
         colors: ["#2fef1a", "#6c7687" , "#caccc7"]
+    end
+    
+    
+    # Vergleich Strecke ÖPNV mit Durchschnitt
+    def comparison_öpnv
+        column_chart [
+        {name: "Ich", data: {"": track_length_öpnv}},
+        {name: "Durchschnitt", data: {"": "980"}},
+        ],
+        width: "500px", height: "300px",
+        ytitle: "km/Jahr",
+        colors: ["#2fef1a", "#6c7687"]
     end
     
     # Summe von Strecke 
@@ -47,17 +60,23 @@ module BalancesHelper
         Balance.where(:user_id => current_user.id , :means_of_transport => "Auto").average(:track_length)
     end
     
+    def vergleich_wohnort
+        User.joins(:balances).where(:place_of_residence => current_user.place_of_residence).sum(:emission) /
+        User.where(:place_of_residence => current_user.place_of_residence).count
+    end
+    
+ 
     # Vergleich mit Durchschnitt
     def vergleich
-        if sum_emission   > 2655
+        if sum_emission   > 2190
             "über"
         else 
             "unter"
         end
     end 
     
-    def vergleich2020
-        if sum_emission   > 1593
+    def vergleichZiel
+        if sum_emission   > 438  #20% von 2190 
             "über"
         else 
             "unter"
@@ -135,6 +154,10 @@ module BalancesHelper
         @balances.where(:user_id => current_user.id , :means_of_transport => "Elektro-PKW").sum(:track_length)
     end 
     
+    # Strecke von ÖPNV 
+    def track_length_öpnv
+        @balances.where(:user_id => current_user.id , :means_of_transport => "Bahn-Nahverkehr" || "Reisebus" || "Linienbus").sum(:track_length)
+    end  
     # Emission Auto
     def emission_auto
         @balances.where(:user_id => current_user.id , :means_of_transport => "Auto").sum(:emission)
@@ -147,12 +170,12 @@ module BalancesHelper
     
     # Durchschnitt Strecke mit öffentlichen Transport
     def durchschnitt_öffentlich
-        @balances.where(:user_id => current_user.id , :means_of_transport => "Bahn-Fernverkehr" && "Bahn-Nahverkehr" && "Reisebus" && "Linienbus").average(:track_length)
+        @balances.where(:user_id => current_user.id , :means_of_transport => "Bahn-Fernverkehr" || "Bahn-Nahverkehr" || "Reisebus" || "Linienbus").average(:track_length)
     end  
     
     # Durchschnitt Strecke zu Fuß
     def durchschnitt_fuss
-        @balances.where(:user_id => current_user.id , :means_of_transport => "Fahrrad" && "zu Fuß").average(:track_length)
+        @balances.where(:user_id => current_user.id , :means_of_transport => "Fahrrad" || "zu Fuß").average(:track_length)
     end
     
     # Meistgenutztes Fahrzeug

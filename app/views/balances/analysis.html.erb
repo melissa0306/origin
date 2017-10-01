@@ -10,7 +10,7 @@
         		
 				<div style="float:left; width:50%; margin-top:50px"> 
            			<p> Du hast <b><%=sum_track_length%></b> km zurückgelegt und dabei <b><%=sum_emission%> </b> kg CO2 ausgestoßen.	
-					<br> Damit liegst du <b><%=vergleich %></b> dem Durchschnitt und <b><%=vergleich2020 %></b> dem Ziel für 2020.</p>
+					<br> Damit liegst du <b><%=vergleich %></b> dem Durchschnitt und <b><%=vergleichZiel %></b> unserem Ziel.</p>
 				</div>
 				
 				<div style="float:right; width:50%; margin-top:50px"> 
@@ -39,12 +39,12 @@
     			<p style="clear:both;"></p>
     			
     			<h3> Gesamtstrecke nach Transportmittel</h3>
-				<div style="float:right; width:50%; margin-top:50px"> 
+				<div style="float:right; width:45%; margin-top:50px"> 
 					<%=track_length_transport %>
 				</div>
 			
 			
-				<div style="float:left; width:50%; margin-top:50px">
+				<div style="float:left; width:45%; margin-top:50px">
 					<% if max_strecke == "zu Fuß" %>
 						<p>Die längste Strecke hast du <b> <%= max_strecke %> </b> zurückgelegt</p>
 					<%else%>
@@ -64,11 +64,11 @@
 				<p style="clear:both;"></p>
 				
 			<h3> Emission nach Transportmittel</h3>	
-			<div style="float:left; width:50%; margin-top:50px"> 
+			<div style="float:left; width:45%; margin-top:50px"> 
 				<%= emission_transport %>
 			</div>
 	
-			<div style="float:right; width:50%; margin-top:50px"> 
+			<div style="float:right; width:45%; margin-top:50px"> 
 				<% if sum_auto < sum_elektro %>
 					<p> Du nutzt Elektro-PKWs und wählst somit eine umweltfreundlichere Alternative gegenüber des normalen PKW </p>
 				<% else %>
@@ -79,6 +79,8 @@
         	</div>
         	
         	<p style="clear:both;"></p>
+        	
+        	<%= comparison_öpnv %>
         	
         	
         	</font>
