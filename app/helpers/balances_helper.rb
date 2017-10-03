@@ -156,7 +156,7 @@ module BalancesHelper
     
     # Strecke von ÖPNV 
     def track_length_öpnv
-        @balances.where(:user_id => current_user.id , :means_of_transport => "Bahn-Nahverkehr" || "Reisebus" || "Linienbus").sum(:track_length)
+        @balances.where(:user_id => current_user.id , means_of_transport: ["Bahn-Nahverkehr", "Reisebus", "Linienbus"]).sum(:track_length)
     end  
     # Emission Auto
     def emission_auto
@@ -170,12 +170,12 @@ module BalancesHelper
     
     # Durchschnitt Strecke mit öffentlichen Transport
     def durchschnitt_öffentlich
-        @balances.where(:user_id => current_user.id , :means_of_transport => "Bahn-Fernverkehr" || "Bahn-Nahverkehr" || "Reisebus" || "Linienbus").average(:track_length)
+        @balances.where(:user_id => current_user.id , means_of_transport: ["Bahn-Fernverkehr", "Bahn-Nahverkehr","Reisebus", "Linienbus"]).average(:track_length)
     end  
     
     # Durchschnitt Strecke zu Fuß
     def durchschnitt_fuss
-        @balances.where(:user_id => current_user.id , :means_of_transport => "Fahrrad" || "zu Fuß").average(:track_length)
+        Balance.where(:user_id => current_user.id, means_of_transport: ["Fahrrad", "zu Fuß"]).average(:track_length)
     end
     
     # Meistgenutztes Fahrzeug
