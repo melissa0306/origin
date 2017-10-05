@@ -1,4 +1,5 @@
 <head>
+	<title>Auswertung</title>
 	<% content_for :title, "Deine Auswertung" %>
 </head>
 
@@ -6,27 +7,28 @@
     <div class="container">
         <div>
             <font size="+1">
+            	
+            <!-- Vergleich mit dem Durchschnitt -->
         		<h3> So stehst du zum Durchschnitt</h3>
         		
-				<div style="float:left; width:50%; margin-top:50px"> 
+				<div style="float:left; width:45%; margin-top:50px"> 
            			<p> Du hast <b><%=sum_track_length%></b> km zurückgelegt und dabei <b><%=sum_emission%> </b> kg CO2 ausgestoßen.	
-					<br> Damit liegst du <b><%=vergleich %></b> dem Durchschnitt und <b><%=vergleichZiel %></b> unserem Ziel.</p>
+					<br> Damit liegst du <b><%=comparison_average %></b> dem Durchschnitt und <b><%=comparison_goal %></b> unserem Ziel.</p>
 				</div>
 				
-				<div style="float:right; width:50%; margin-top:50px"> 
+				<div style="float:right; width:45%; margin-top:50px"> 
 					<%= comparison %>
 				</div>
-				
 				<p style="clear:both;"></p>
 				
-			<h3> Deine bevorzugten Transportmittel</h3>	
+			<!-- Häufigkeiten der Nutzng der Transportmittel -->
+				<h3> Deine bevorzugten Transportmittel</h3>	
 				
-				<div style="float:left; width:50%; margin-top:50px"> 
-	    		<%= used_transport%>    
-
-	    		</div>
+				<div style="float:left; width:45%; margin-top:50px"> 
+	    			<%= used_transport%>    
+				</div>
 	    		
-	    		<div style="float:right; width:50%; margin-top:50px"> 
+	    		<div style="float:right; width:45%; margin-top:50px"> 
 	    			<p> dein meinstgenutztes Transportmittel ist <b><%= max_anzahl %></b></p>
 	    			<% if sum_auto >= sum_bahn_fern + sum_bahn_nah + sum_linienbus + sum_reisebus %>
 	    				<p>Du bevorzugst es mit dem Auto zu fahren. Nutze den <b>öffentlichen Personennahverkehr</b> oder die<b> Bahn </b> anstelle des eigenen PKW <br>
@@ -36,8 +38,9 @@
 	    			<%end%>
 	    		</div>
 	    		
-    			<p style="clear:both;"></p>
+	    		<p style="clear:both;"></p>
     			
+    		<!-- Gesamtstrecke der Fahrzeuge -->
     			<h3> Gesamtstrecke nach Transportmittel</h3>
 				<div style="float:right; width:45%; margin-top:50px"> 
 					<%=track_length_transport %>
@@ -50,42 +53,41 @@
 					<%else%>
 						<p>Die längste Strecke hast du mit <b> <%=max_strecke %></b> zurückgelegt</p>
 					<%end %>
-			      	<p> Mit dem <b> Auto </b> legst du im Durchschnitt eine Strecke von <b> <%= durchschnitt_auto %> km </b> zurück. <br>
-			      	<% if anzahl_auto > 5 %>
-                		<p>Versuche <b>kurze Strecken</b> zu Fuß oder mit dem Fahrrad zurückzulegen, das schont nicht nur die <b> Umwelt</b>, sondern auch deinen Geldbeutel.
-                		So kannst du <b> 0,10€ pro km</b> einsparen und  du tust deiner <b>Gesundheit</b> was Gutes!"</p>
-            		<%else%>
-                		<p><b>Super!</b> Du vermeidest kurze Strecken mit dem Auto zu fahren!</p>
-            		<%end%>
-			      		<b> Öffentliche Transportmittel </b> nutzt du bei Fahrten von <b> <%= durchschnitt_öffentlich %> km </b> Länge. <br>
-			      		<b> Zu Fuß </b> oder mit dem <b> Fahrrad </b> legst du durchschnittlich eine Strecke von <b> <%= durchschnitt_fuss %> km </b> zurück.
+			      	<p> Mit dem <b> Auto </b> legst du im Durchschnitt eine Strecke von <b> <%= average_auto %> km </b> zurück. <br>
+				      	<% if count_auto > 5 %>
+	                		<p>Versuche <b>kurze Strecken unter 5km</b> zu Fuß oder mit dem Fahrrad zurückzulegen, das schont nicht nur die <b> Umwelt</b>, sondern auch deinen Geldbeutel.
+	                		So kannst du <b> 0,10€ pro km</b> einsparen und  du tust deiner <b>Gesundheit</b> was Gutes!"</p>
+	            		<%else%>
+	                		<p><b>Super!</b> Du vermeidest kurze Strecken unter 5km mit dem Auto zu fahren!</p>
+	            		<%end%>
+				      	<b> Öffentliche Transportmittel </b> nutzt du bei Fahrten von <b> <%= average_öffentlich %> km </b> Länge. <br>
+				      	<b> Zu Fuß </b> oder mit dem <b> Fahrrad </b> legst du durchschnittlich eine Strecke von <b> <%= average_fuss %> km </b> zurück.
 			      	</p> 
 				</div>
+				
 				<p style="clear:both;"></p>
 				
-			<h3> Emission nach Transportmittel</h3>	
-			<div style="float:left; width:45%; margin-top:50px"> 
-				<%= emission_transport %>
-			</div>
-	
-			<div style="float:right; width:45%; margin-top:50px"> 
-				<% if sum_auto < sum_elektro %>
-					<p> Du nutzt Elektro-PKWs und wählst somit eine umweltfreundlichere Alternative gegenüber des normalen PKW </p>
-				<% else %>
-					<p> Versuche mehr auf <b>Elektroautos</b> zurückzugreifen. Viele <b>Carsharing</b>anbieter haben sie im Angebot und sie sind eine <b>umweltfreundlichere</b> Alternative gegenüber normalen PKWs. </p>
-				<% end %>
-				
-				<p> Mit dem <b>Auto</b> erreichst du einen Gesamtausstoß von <b><%= emission_auto %> kg</b>. Mit öffentlichen Verkehrsmitteln würdest du für die selbe Strecke <b><%= emission_auto*0.37%> kg</b> ausstoßen.
-        	</div>
-        	
-        	<p style="clear:both;"></p>
-        	
-        	<%= comparison_öpnv %>
-        	
-        	
+			<!-- Emission pro Transportmittel -->
+				<h3> Emission der Transportmittel</h3>	
+				<div style="float:left; width:45%; margin-top:50px"> 
+					<%= emission_transport %>
+				</div>
+		
+				<div style="float:right; width:45%; margin-top:50px"> 
+					<% if sum_auto < sum_elektro %>
+						<p> Du nutzt Elektro-PKWs und wählst somit eine umweltfreundlichere Alternative gegenüber des normalen PKW </p>
+					<% else %>
+						<p> Versuche mehr auf <b>Elektroautos</b> zurückzugreifen. Viele <b>Carsharing</b>anbieter haben sie im Angebot und sie sind eine <b>umweltfreundlichere</b> Alternative gegenüber normalen PKWs. </p>
+					<% end %>
+					<p> Mit dem <b>Auto</b> erreichst du einen Gesamtausstoß von <b><%= emission_auto %> kg</b>. Mit öffentlichen Verkehrsmitteln würdest du für die selbe Strecke <b><%= emission_auto*0.37%> kg</b> ausstoßen.
+	        	</div>
+	        	
+	        	<p style="clear:both;"></p>
+	        	
+	        	<%= comparison_öpnv %>
+
         	</font>
         </div>
-        
-        
+   
     </div>
 </body>

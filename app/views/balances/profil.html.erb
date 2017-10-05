@@ -1,35 +1,35 @@
 <head>
+	<title>Profil</title>
 	<% content_for :title, "dein Profil" %>
 </head>
 
 <body>
 	<div class="container">
 		<ul class="divided">
-	<li>
-		<article class="box post-summary">
-			<h3><a href="#">Username </a></h3>
-		</article>
-	</li>
-	  <%= current_user.username %>
-	
-	<li>
-		<article class="box post-summary">
-			<h3><a href="#">Geburtstag</a></h3>
-		</article>
-	</li>
-         <%= current_user.birthday %>
-  
-	<li>
-		<article class="box post-summary">
-			<h3><a href="#">Wohnort</a></h3>
-		</article>
-	</li>
-	<%= current_user.place_of_residence %>
-  
-	<li>
-	
-	    <%= link_to "bearbeiten", edit_user_registration_path %>
-
-</ul>
-</div>
+			<li>
+				<article class="box post-summary">
+					<h3><a href="#">Username </a></h3>
+				</article>
+			</li>
+			  <%= current_user.username %>
+			
+			<li>
+				<article class="box post-summary">
+					<h3><a href="#">Geburtstag</a></h3>
+				</article>
+			</li>
+		         <%= current_user.birthday %>
+		  
+			<li>
+				<article class="box post-summary">
+					<h3><a href="#">Wohnort</a></h3>
+				</article>
+			</li>
+			<%= current_user.place_of_residence %>
+			
+			<li>
+				<%= link_to "bearbeiten", edit_user_registration_path %>
+			</li>
+		</ul>
+	</div>
 </body>
