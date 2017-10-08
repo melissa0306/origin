@@ -120,60 +120,60 @@ module BalancesHelper
         
 #  mit Fahrzeug zurückgelegte Strecke   
     def track_length_auto
-        @balances.where(:user_id => current_user.id , :means_of_transport => "Auto").sum(:track_length)
+        @balances.where(:user_id => current_user.id , :means_of_transport => "Auto").sum(:track_length).round(2)
     end 
     
     def track_length_linienbus
-        @balances.where(:user_id => current_user.id , :means_of_transport => "Linienbus").sum(:track_length)
+        @balances.where(:user_id => current_user.id , :means_of_transport => "Linienbus").sum(:track_length).round(2)
     end 
     
     def track_length_reisebus
-        @balances.where(:user_id => current_user.id , :means_of_transport => "Reisebus").sum(:track_length)
+        @balances.where(:user_id => current_user.id , :means_of_transport => "Reisebus").sum(:track_length).round(2)
     end 
     
     def track_length_bahn_nah
-        @balances.where(:user_id => current_user.id , :means_of_transport => "Bahn-Nahverkehr").sum(:track_length)
+        @balances.where(:user_id => current_user.id , :means_of_transport => "Bahn-Nahverkehr").sum(:track_length).round(2)
     end 
 
     def track_length_bahn_fern
-        @balances.where(:user_id => current_user.id , :means_of_transport => "Bahn-Fernverkehr").sum(:track_length)
+        @balances.where(:user_id => current_user.id , :means_of_transport => "Bahn-Fernverkehr").sum(:track_length).round(2)
     end
     
     def track_length_zu_fuß
-        @balances.where(:user_id => current_user.id , :means_of_transport => "zu Fuß").sum(:track_length)
+        @balances.where(:user_id => current_user.id , :means_of_transport => "zu Fuß").sum(:track_length).round(2)
     end 
     
     def track_length_fahrrad
-        @balances.where(:user_id => current_user.id , :means_of_transport => "Fahrrad").sum(:track_length)
+        @balances.where(:user_id => current_user.id , :means_of_transport => "Fahrrad").sum(:track_length).round(2)
     end 
     
     def track_length_elektro
-        @balances.where(:user_id => current_user.id , :means_of_transport => "Elektro-PKW").sum(:track_length)
+        @balances.where(:user_id => current_user.id , :means_of_transport => "Elektro-PKW").sum(:track_length).round(2)
     end 
     
 # Strecke von ÖPNV 
     def track_length_öpnv
-        @balances.where(:user_id => current_user.id , means_of_transport: ["Bahn-Nahverkehr", "Reisebus", "Linienbus"]).sum(:track_length)
+        @balances.where(:user_id => current_user.id , means_of_transport: ["Bahn-Nahverkehr", "Reisebus", "Linienbus"]).sum(:track_length).round(2)
     end  
     
 # Emission Auto
     def emission_auto
-        @balances.where(:user_id => current_user.id , :means_of_transport => "Auto").sum(:emission)
+        @balances.where(:user_id => current_user.id , :means_of_transport => "Auto").sum(:emission).round(3)
     end
 
 # Durchschnitt Strecke mit Auto     
     def average_auto
-        @balances.where(:user_id => current_user.id , :means_of_transport => "Auto").average(:track_length)
+        @balances.where(:user_id => current_user.id , :means_of_transport => "Auto").average(:track_length).round(2)
     end
     
 # Durchschnitt Strecke mit öffentlichen Transport
     def average_öffentlich
-        @balances.where(:user_id => current_user.id , means_of_transport: ["Bahn-Fernverkehr", "Bahn-Nahverkehr","Reisebus", "Linienbus"]).average(:track_length)
+        @balances.where(:user_id => current_user.id , means_of_transport: ["Bahn-Fernverkehr", "Bahn-Nahverkehr","Reisebus", "Linienbus"]).average(:track_length).round(2)
     end  
     
-# Durchschnitt Strecke zu Fuß
+# urchschnitt Strecke zu Fuß
     def average_fuss
-        Balance.where(:user_id => current_user.id, means_of_transport: ["Fahrrad", "zu Fuß"]).average(:track_length)
+        Balance.where(:user_id => current_user.id, means_of_transport: ["Fahrrad", "zu Fuß"]).average(:track_length).round(2)
     end
     
 # Meistgenutztes Fahrzeug

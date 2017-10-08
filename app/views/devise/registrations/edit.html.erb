@@ -29,11 +29,11 @@
 		  </div>
 		
 		  <div class="field">
-			<%= f.label :passwort %> <i>(leave blank if you don't want to change it)</i>
+			<%= f.label :passwort %> <i>(Lasse es aus wenn du nichts ändern möchtest)</i>
 			<%= f.password_field :password, autocomplete: "off" %>
 			<% if @minimum_password_length %>
-		  	<br />
-		  	<em><%= @minimum_password_length %> characters minimum</em>
+		  	<em>mindestens <%= @minimum_password_length %> Zeichen</em>
+		  	</br>
 			<% end %></br>
 		  </div>
 		
@@ -43,7 +43,7 @@
 		  </div>
 		
 		  <div class="field">
-			<%= f.label :aktuelles_passwort %> <i>(we need your current password to confirm your changes)</i>
+			<%= f.label :aktuelles_passwort %> <i>(Wir brauchen dein Passwort um deine Änderungen zu bestätigen)</i>
 			<%= f.password_field :current_password, autocomplete: "off" %><br />
 		  </div>
 		

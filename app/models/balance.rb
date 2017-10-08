@@ -6,7 +6,7 @@ class Balance < ActiveRecord::Base
         ["Auto", "Bahn-Fernverkehr", "Bahn-Nahverkehr", "Linienbus", "Reisebus", "Fahrrad", "zu Fuß", "Elektro-PKW"]
     end
 
-
+#Berechnung der Emissionen bei Auswahl des Fahrzeugs
     def calculate_emission
         if  means_of_transport.to_s == "Auto"
             self.emission = track_length.to_i * 0.142 

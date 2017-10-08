@@ -1,6 +1,6 @@
 <%= simple_form_for(@balance) do |f| %>
 <%= f.input :date, :order => [:day, :month, :year], label: "Datum" %>
 <%= f.input :track_length, input_html: {value: f.object.track_length || '1'}, label: "zurückgelegte Km" %>
-<%= f.input :means_of_transport, collection: @balance.means_of_transport_selection, label: "Select", include_blank: false %> 
-<%= f.submit %>
+<%= f.input :means_of_transport, collection: @balance.means_of_transport_selection, label: "Fahrzeug", include_blank: false %> 
+<%= f.submit "Emission eintragen" %>
 <% end %>
