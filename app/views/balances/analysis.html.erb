@@ -85,8 +85,29 @@
 	        	
 	        	<p style="clear:both;"></p>
 	        	
-	        	<%= comparison_öpnv %>
-
+	        	
+	        	<h3> Rang </h3>	
+				<div style="float:left; width:45%; margin-top:50px; margin-left: 100px"> 
+					<% if ribbon == "1" %>
+	        			<p> Du hälst deine Emissionen gering und leistest einen <b>großen Beitrag</b> für die Umwelt.
+	        			Dafür erhälst du das <b>Goldene Abzeichen</b>. Du kannst stolz au dich sein! </p> 
+		        	<% elsif test1 == "2" %> 
+		        		<p> Du bist auf einem <b>guten Weg</b> unser Ziel zu erreichen. Klasse! Du erhälst dafür das <b>Silberne Abzeichen</b> </p>
+		        	<% else %>
+		        		<p> Super dass du mitmachst! Versuche unsere <b>Anregungen</b> umzusetzen und erreiche so das <b> Ziel </b></p>
+		        	<% end %>
+				</div>
+		
+				<div style="float:right; width:45%; margin-top:50px"> 
+	        	<% if ribbon == "1" %>
+	        		<img src="/assets/gold.jpg", width="176" height="268.4">
+	        	<% elsif test1 == "2" %> 
+	        		<img src="/assets/silber.jpg", width="176" height="268.4">
+	        	<% else %>
+	        		<img src="/assets/bronze.jpg", width="176" height="268.4">
+	        	<% end %>
+	        	</div>
+	        	
         	</font>
         </div>
    

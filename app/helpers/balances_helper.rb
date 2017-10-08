@@ -253,4 +253,14 @@ module BalancesHelper
             end
         end  
     end
+    
+# Rangzuordnung     
+    def ribbon 
+		case sum_emission 
+		when 0..1752 then "1"
+		when 1753..1971 then "2" 
+	    else  "3" 
+		end 
+    end
+    
 end
