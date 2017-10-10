@@ -29,7 +29,7 @@
 				</div>
 	    		
 	    		<div style="float:right; width:45%; margin-top:50px"> 
-	    			<p> dein meinstgenutztes Transportmittel ist <b><%= max_anzahl %></b></p>
+	    			<p> Dein meinstgenutztes Transportmittel ist <b><%= max_anzahl %></b></p>
 	    			<% if sum_auto >= sum_bahn_fern + sum_bahn_nah + sum_linienbus + sum_reisebus %>
 	    				<p>Du bevorzugst es mit dem Auto zu fahren. Nutze den <b>öffentlichen Personennahverkehr</b> oder die<b> Bahn </b> anstelle des eigenen PKW <br>
 	    				Auf vielen Strecken sparst du damit sogar Zeit und kannst die Fahrzeit <b>effektiv</b> zum Arbeiten oder Entspannen nutzen!</p>
@@ -69,7 +69,7 @@
 				<p style="clear:both;"></p>
 				
 			<!-- Emission pro Transportmittel -->
-				<h3> Emission der Transportmittel</h3>	
+				<h3> Emissionen nach Transportmittel</h3>	
 				<div style="float:left; width:45%; margin-top:50px"> 
 					<%= emission_transport %>
 				</div>
@@ -89,22 +89,26 @@
 	        	<h3> Rang </h3>	
 				<div style="float:left; width:45%; margin-top:50px; margin-left: 100px"> 
 					<% if ribbon == "1" %>
-	        			<p> Du hälst deine Emissionen gering und leistest einen <b>großen Beitrag</b> für die Umwelt.
-	        			Dafür erhälst du das <b>Goldene Abzeichen</b>. Du kannst stolz au dich sein! </p> 
-		        	<% elsif test1 == "2" %> 
-		        		<p> Du bist auf einem <b>guten Weg</b> unser Ziel zu erreichen. Klasse! Du erhälst dafür das <b>Silberne Abzeichen</b> </p>
+	        			<p> Du hältst deine Emissionen gering und leistest einen <b>großen Beitrag</b> für die Umwelt.
+	        			Dafür erhältst du das <b>Goldene Abzeichen</b>. Du kannst stolz auf dich sein! </p> 
+		        	<% elsif ribbon == "2" %> 
+		        		<p> Du bist auf einem <b>guten Weg</b> unser Ziel zu erreichen. Klasse! Du erhältst dafür das <b>Silberne Abzeichen</b> </p>
+		        	<% elsif ribbon == "3" %>
+		        		<p> Super, dass du mitmachst! Versuche unsere <b>Anregungen</b> umzusetzen und erreiche so das <b> Ziel </b></p>
 		        	<% else %>
-		        		<p> Super dass du mitmachst! Versuche unsere <b>Anregungen</b> umzusetzen und erreiche so das <b> Ziel </b></p>
+		        		<p>Werde <b> jetzt</b> aktiv und ändere deine Gewohnheiten. Die <b>Zeit</b> läuft! </p>
 		        	<% end %>
 				</div>
 		
 				<div style="float:right; width:45%; margin-top:50px"> 
 	        	<% if ribbon == "1" %>
 	        		<img src="/assets/gold.jpg", width="176" height="268.4">
-	        	<% elsif test1 == "2" %> 
+	        	<% elsif ribbon == "2" %> 
 	        		<img src="/assets/silber.jpg", width="176" height="268.4">
-	        	<% else %>
+	        	<% elsif ribbon == "3" %>
 	        		<img src="/assets/bronze.jpg", width="176" height="268.4">
+	        	<% else %>
+	        		<img src="/assets/bear.jpg", width="176" height="268.4">
 	        	<% end %>
 	        	</div>
 	        	

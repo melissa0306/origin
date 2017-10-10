@@ -120,91 +120,91 @@ module BalancesHelper
         
 #  mit Fahrzeug zurückgelegte Strecke   
     def track_length_auto
-        unless sum_auto.nil? || sum_auto == 0 
+        unless sum_auto.nil? 
             @balances.where(:user_id => current_user.id , :means_of_transport => "Auto").sum(:track_length).round(2)
         end
     end 
     
     def track_length_linienbus
-        unless sum_linienbus.nil? || sum_linienbus == 0
+        unless sum_linienbus.nil? 
             @balances.where(:user_id => current_user.id , :means_of_transport => "Linienbus").sum(:track_length).round(2)
         end 
     end
     
     def track_length_reisebus
-        unless sum_reisebus.nil? || sum_reisebus == 0
+        unless sum_reisebus.nil? 
             @balances.where(:user_id => current_user.id , :means_of_transport => "Reisebus").sum(:track_length).round(2)
         end 
     end
     
     def track_length_bahn_nah
-        unless sum_bahn_nah.nil? || sum_bahn_nah == 0
+        unless sum_bahn_nah.nil? 
             @balances.where(:user_id => current_user.id , :means_of_transport => "Bahn-Nahverkehr").sum(:track_length).round(2)
         end 
     end
     
     def track_length_bahn_fern
-        unless sum_bahn_fern.nil? || sum_bahn_fern == 0
+        unless sum_bahn_fern.nil? 
             @balances.where(:user_id => current_user.id , :means_of_transport => "Bahn-Fernverkehr").sum(:track_length).round(2)
         end
     end
     
     def track_length_zu_fuß
-        unless sum_zu_fuß.nil? || sum_zu_fuß == 0
+        unless sum_zu_fuß.nil? 
             @balances.where(:user_id => current_user.id , :means_of_transport => "zu Fuß").sum(:track_length).round(2)
         end 
     end
     
     def track_length_fahrrad
-        unless sum_fahrrad.nil? || sum_fahrrad == 0
+        unless sum_fahrrad.nil? 
             @balances.where(:user_id => current_user.id , :means_of_transport => "Fahrrad").sum(:track_length).round(2)
         end 
     end
     
     def track_length_elektro
-        unless sum_elektro.nil? || sum_elektro == 0
+        unless sum_elektro.nil? 
             @balances.where(:user_id => current_user.id , :means_of_transport => "Elektro-PKW").sum(:track_length).round(2)
         end 
     end
     
 # Strecke von ÖPNV 
     def track_length_öpnv
-        unless sum_bahn_nah.nil? || sum_bahn_nah == 0  || sum_reisebus.nil? || sum_reisebus == 0 || sum_linienbus.nil? || sum_linienbus == 0
+        unless sum_bahn_nah.nil?  && sum_reisebus.nil? && sum_linienbus.nil? 
             @balances.where(:user_id => current_user.id , means_of_transport: ["Bahn-Nahverkehr", "Reisebus", "Linienbus"]).sum(:track_length).round(2)
         end  
     end
     
 # Emission Auto
     def emission_auto
-        unless sum_auto.nil? || sum_auto == 0 
+        unless sum_auto.nil? 
             @balances.where(:user_id => current_user.id , :means_of_transport => "Auto").sum(:emission).round(3)
         end
     end
 
 # Durchschnitt Strecke mit Auto     
     def average_auto
-        unless sum_auto.nil? || sum_auto == 0 
+        unless sum_auto.nil? 
             @balances.where(:user_id => current_user.id , :means_of_transport => "Auto").average(:track_length).round(2)
         end
     end
     
 # Durchschnitt Strecke mit öffentlichen Transport
     def average_öffentlich
-        unless sum_bahn_nah.nil? || sum_bahn_nah == 0  || sum_reisebus.nil? || sum_reisebus == 0 || sum_linienbus.nil? || sum_linienbus == 0 || sum_bahn_fern.nil? || sum_bahn_fern == 0
+        unless sum_bahn_nah.nil? && sum_reisebus.nil? && sum_linienbus.nil? && sum_bahn_fern.nil? 
             @balances.where(:user_id => current_user.id , means_of_transport: ["Bahn-Fernverkehr", "Bahn-Nahverkehr","Reisebus", "Linienbus"]).average(:track_length).round(2)
         end  
     end
     
 # Durchschnitt Strecke zu Fuß
     def average_fuss
-        unless sum_fahrrad.nil? || sum_fahrrad == 0  || sum_zu_fuß.nil? || sum_zu_fuß == 0 
+        unless sum_fahrrad.nil? && sum_zu_fuß.nil 
             Balance.where(:user_id => current_user.id, means_of_transport: ["Fahrrad", "zu Fuß"]).average(:track_length).round(2)
         end
     end
     
 # Meistgenutztes Fahrzeug
     def max_anzahl
-        unless sum_auto.nil? || sum_linienbus.nil? || sum_reisebus.nil? || sum_bahn_nah.nil? || sum_zu_fuß.nil? || sum_fahrrad.nil? || sum_elektro.nil? || sum_bahn_fern.nil? 
+        unless sum_auto.nil? && sum_linienbus.nil? && sum_reisebus.nil? && sum_bahn_nah.nil? && sum_zu_fuß.nil? && sum_fahrrad.nil? && sum_elektro.nil? && sum_bahn_fern.nil? 
             maxi = [sum_auto, sum_linienbus, sum_reisebus, sum_bahn_fern, sum_bahn_nah, sum_zu_fuß, sum_fahrrad, sum_elektro].max
             case maxi
             when sum_auto
@@ -229,8 +229,8 @@ module BalancesHelper
     
 # Fahrzeug mit höchster Streckenlänge
     def max_strecke
-        unless track_length_auto.nil? || track_length_bahn_fern.nil? || track_length_bahn_nah.nil? || track_length_linienbus.nil? || 
-        track_length_reisebus.nil? || track_length_fahrrad.nil? || track_length_zu_fuß.nil? || track_length_elektro.nil? 
+        unless track_length_auto.nil? && track_length_bahn_fern.nil? && track_length_bahn_nah.nil? && track_length_linienbus.nil? && 
+        track_length_reisebus.nil? && track_length_fahrrad.nil? && track_length_zu_fuß.nil? && track_length_elektro.nil? 
             maxi = [track_length_auto, track_length_bahn_fern, track_length_bahn_nah,
             track_length_linienbus, track_length_reisebus, track_length_fahrrad, track_length_zu_fuß, track_length_elektro].max
             case maxi
@@ -258,8 +258,9 @@ module BalancesHelper
     def ribbon 
 		case sum_emission 
 		when 0..1752 then "1"
-		when 1753..1971 then "2" 
-	    else  "3" 
+		when 1753..1971 then "2"
+		when 1971..2190 then "3"
+	    else  "4" 
 		end 
     end
     
