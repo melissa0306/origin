@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html>
+<!--Layout -->
+
 <head>
   <title>Footprint</title>
   <%= javascript_include_tag :defaults %>
@@ -8,20 +8,18 @@
   <%= javascript_include_tag "https://www.google.com/jsapi" %>
   <%= csrf_meta_tags %>
 </head>
+
 <body>
+  <!-- Ausgelagerter Header -->  
+  <%= render "layouts/header" %>
   
-<!-- Ausgelagerter Header -->  
-<%= render "layouts/header" %>
-
-<!-- für devise -->
-<span class="notice"><%= notice %></span>
-<span class="alert"><%= alert %></span>
-
-<!-- dynamischer Inhalt --> 
-<%= yield %> 
-
-<!-- Ausgelagerter Footer --> 
-<%= render "layouts/footer" %>
-
+  <!-- für devise -->
+  <span class="notice"><%= notice %></span>
+  <span class="alert"><%= alert %></span>
+  
+  <!-- dynamischer Inhalt --> 
+  <%= yield %> 
+  
+  <!-- Ausgelagerter Footer --> 
+  <%= render "layouts/footer" %>
 </body>
-</html>

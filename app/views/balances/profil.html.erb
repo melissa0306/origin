@@ -1,34 +1,42 @@
+<!-- Profil -->
+
 <head>
 	<title>Profil</title>
 	<% content_for :title, "dein Profil" %>
 </head>
 
 <body>
+<!-- Userdaten -->	
 	<div class="container">
 		<ul class="divided">
+		
+		<!-- Username -->	
 			<li>
 				<article class="box post-summary">
 					<h3><a href="#">Username </a></h3>
 				</article>
 			</li>
 			  <%= current_user.username %>
-			
+			  
+		<!-- Geburtstag -->	
 			<li>
 				<article class="box post-summary">
 					<h3><a href="#">Geburtstag</a></h3>
 				</article>
 			</li>
 		         <%= current_user.birthday %>
-		  
+		
+		<!-- Wohnort -->  
 			<li>
 				<article class="box post-summary">
 					<h3><a href="#">Wohnort</a></h3>
 				</article>
 			</li>
 			<%= current_user.place_of_residence %>
-			
+		
+		<!-- link um Daten zu bearbeiten --> 	
 			<li>
-				<%= link_to "bearbeiten", edit_user_registration_path %>
+				<%= link_to "Bearbeiten", edit_user_registration_path %>
 			</li>
 		</ul>
 	</div>

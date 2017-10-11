@@ -1,3 +1,5 @@
+<!-- Anzeige für Emissionseintrag/ Reisedaten-->
+
 <head>
 	<title>Eintrag</title>
 	<% content_for :title, "Daten eingetragen" %>
@@ -5,16 +7,20 @@
 
 <body>
 	<div class="container">
-		
+	
+	<!-- Datum -->	
     	<h4> Datum: </h4>
     	<p> <%= @balance.date %> </p>
-    	
+   
+   	<!-- Strecke in km --> 	
     	<h4> Strecke:</h4>
 		<p> <%= @balance.track_length %> <%= "km" %> </p>
-		
+	
+	<!-- CO2-Ausstoß in kg -->	
 		<h4> Ausstoß:</h4>
 		<p> <%= @balance.emission %> <%= "kg" %> </p>
-		
+	
+	<!-- Transportmittel -->	
 		<h4>Transportmittel:</h4>
 		<p> <%= @balance.means_of_transport %> </p>
 		

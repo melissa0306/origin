@@ -1,3 +1,5 @@
+<!-- Emissionsrechner -->
+
 <head>
     <title>Karte</title>
     <% content_for :title, "Emission eintragen" %>
@@ -5,12 +7,15 @@
 
 <body>
   	<div class="container">
+  		
+  	<!-- Formular -->	
   		<div style="float:right; width:40%"> 
   		<h1>Emission eintragen</h1>
         	<%= render 'form' %>
         	<%=link_to "Cancel", root_path %>
     	</div>
     
+	<!-- Kartenfunktion -->
 		
 		<div style="float:left; width:50%"> 
 		<h1>Strecke berechnen </h1>
@@ -30,21 +35,24 @@
 		            new google.maps.places.SearchBox(document.getElementById('txtDestination'));
 		            directionsDisplay = new google.maps.DirectionsRenderer({ 'draggable': true });
 		        });
-		
+				/* Aktion bei Klick auf Button "Auto" */
 		        function Auto() {
+		        	/* Öffnen der Karte bei Göttingen */
 		            var goett = new google.maps.LatLng(51.5412, 9.9158);
 		            var mapOptions = {
 		                zoom: 14,
 		                center: goett
 		            };
+		            /* Funktion um Marker zu bewegen */
 		            map = new google.maps.Map(document.getElementById('dvMap'), mapOptions);
 		            directionsDisplay.setMap(map);
 		            directionsDisplay.setPanel(document.getElementById('dvPanel'));
 		
-		            //*********DIRECTIONS AND ROUTE**********************//
+		            /* Start und Zieleingabefunktion */
 		            source = document.getElementById("txtSource").value;
 		            destination = document.getElementById("txtDestination").value;
 		
+		            /* Überleitung des Reisemodus DRIVING */
 		            var request = {
 		                origin: source,
 		                destination: destination,
@@ -56,7 +64,7 @@
 		                }
 		            });
 		
-		            //*********DISTANCE AND DURATION**********************//
+		            /*Distanz und Fahrtdauer*/
 		            var service = new google.maps.DistanceMatrixService();
 		            service.getDistanceMatrix({
 		                origins: [source],
@@ -65,6 +73,7 @@
 		                unitSystem: google.maps.UnitSystem.METRIC,
 		                avoidHighways: false,
 		                avoidTolls: false
+		                
 		            }, function (response, status) {
 		                if (status == google.maps.DistanceMatrixStatus.OK && response.rows[0].elements[0].status != "ZERO_RESULTS") {
 		                    var distance = response.rows[0].elements[0].distance.text;
@@ -72,7 +81,7 @@
 		                    var dvDistance = document.getElementById("dvDistance");
 		                   dvDistance.innerHTML = "";
 		                   dvDistance.innerHTML += "Strecke: " + distance + "<br />";
-		               //     dvDistance.innerHTML += "Duration: " + duration;
+		              
 					   
 		                } else {
 		                    alert("Unable to find the distance via road.");
@@ -81,21 +90,24 @@
 		        }
 		        
 		        
-		        
+		     /* Aktion bei Klick auf Button "ZuFuß" */
 		        function ZuFuß() {
+		            /* Öffnen der Karte bei Göttingen */
 		            var goett = new google.maps.LatLng(51.5412, 9.9158);
 		            var mapOptions = {
 		                zoom: 14,
 		                center: goett
 		            };
+		            /* Funktion um Marker zu bewegen */
 		            map = new google.maps.Map(document.getElementById('dvMap'), mapOptions);
 		            directionsDisplay.setMap(map);
 		            directionsDisplay.setPanel(document.getElementById('dvPanel'));
 		
-		            //*********DIRECTIONS AND ROUTE**********************//
+		            /* Start und Zieleingabefunktion */
 		            source = document.getElementById("txtSource").value;
 		            destination = document.getElementById("txtDestination").value;
 		
+		            /* Überleitung des Reisemodus WALKING */
 		            var request = {
 		                origin: source,
 		                destination: destination,
@@ -107,7 +119,7 @@
 		                }
 		            });
 		
-		            //*********DISTANCE AND DURATION**********************//
+		            /*Distanz und Fahrtdauer*/
 		            var service = new google.maps.DistanceMatrixService();
 		            service.getDistanceMatrix({
 		                origins: [source],
@@ -131,21 +143,24 @@
 		            });
 		        }
 		        
-		        
+		        /* Aktion bei Klick auf Button "Bus/Bahn" */
 		        function MitBus() {
+		        	/* Öffnen der Karte bei Göttingen */
 		            var goett = new google.maps.LatLng(51.5412, 9.9158);
 		            var mapOptions = {
 		                zoom: 14,
 		                center: goett
 		            };
+		            /* Funktion um Marker zu bewegen */
 		            map = new google.maps.Map(document.getElementById('dvMap'), mapOptions);
 		            directionsDisplay.setMap(map);
 		            directionsDisplay.setPanel(document.getElementById('dvPanel'));
 		
-		            //*********DIRECTIONS AND ROUTE**********************//
+		            /* Start und Zieleingabefunktion */
 		            source = document.getElementById("txtSource").value;
 		            destination = document.getElementById("txtDestination").value;
 		
+		            /* Überleitung des Reisemodus TRANSIT */
 		            var request = {
 		                origin: source,
 		                destination: destination,
@@ -157,7 +172,7 @@
 		                }
 		            });
 		
-		            //*********DISTANCE AND DURATION**********************//
+		            /*Distanz und Fahrtdauer*/
 		            var service = new google.maps.DistanceMatrixService();
 		            service.getDistanceMatrix({
 		                origins: [source],
@@ -166,6 +181,8 @@
 		                unitSystem: google.maps.UnitSystem.METRIC,
 		                avoidHighways: false,
 		                avoidTolls: false
+		                
+		            /* Ausgabe Streckenlänge */    
 		            }, function (response, status) {
 		                if (status == google.maps.DistanceMatrixStatus.OK && response.rows[0].elements[0].status != "ZERO_RESULTS") {
 		                    var distance = response.rows[0].elements[0].distance.text;
@@ -184,6 +201,7 @@
     		</script>
 		    <table border="0" cellpadding="0" cellspacing="3">
 		        <tr>
+		        	<!-- Eingabefelder für Start und Ziel und Buttons -->
 		            <td colspan="2">
 		                <p> <b> Start: </b>
 		                <input type="text" id="txtSource" value="Hauptbahnhof, Göttingen, Deutschland" style="width: 300px" />
@@ -193,11 +211,12 @@
 		               
 		                <input type="button" value="Auto" onclick="Auto()" />
 		                <input type="button" value="Zu Fuß" onclick="ZuFuß()" />
-		                <input type="button" value="Bus/Bahn" onclick="MitBus()" />
+		                <input type="button" value="Bus" onclick="MitBus()" />
 		                
 		            </td>
 		        </tr>
 		        <tr>
+		        	<!-- km Anzeige über Karte -->
 		            <td colspan="2">
 		                <div id="dvDistance">
 		                </div>
@@ -205,6 +224,7 @@
 		        </tr>
 		        <tr>
 		            <td>
+		            	<!-- Größe der Map und der Weganweisungen -->
 		                <div id="dvMap" style="width: 600px; height: 400px">
 		                </div>
 		                 <div id="dvPanel" style="width: 700px; height: 700px">

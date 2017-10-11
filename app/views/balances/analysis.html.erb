@@ -1,3 +1,5 @@
+<!-- Auswertungsseite mit Diagrammen -->
+
 <head>
 	<title>Auswertung</title>
 	<% content_for :title, "Deine Auswertung" %>
@@ -40,7 +42,7 @@
 	    		
 	    		<p style="clear:both;"></p>
     			
-    		<!-- Gesamtstrecke der Fahrzeuge -->
+    		<!-- Gesamtstrecke nach Fahrzeuge -->
     			<h3> Gesamtstrecke nach Transportmittel</h3>
 				<div style="float:right; width:45%; margin-top:50px"> 
 					<%=track_length_transport %>
@@ -68,7 +70,7 @@
 				
 				<p style="clear:both;"></p>
 				
-			<!-- Emission pro Transportmittel -->
+			<!-- Emissionen nach Transportmittel -->
 				<h3> Emissionen nach Transportmittel</h3>	
 				<div style="float:left; width:45%; margin-top:50px"> 
 					<%= emission_transport %>
@@ -85,7 +87,7 @@
 	        	
 	        	<p style="clear:both;"></p>
 	        	
-	        	
+	        <!-- Rangzuordnung -->	
 	        	<h3> Rang </h3>	
 				<div style="float:left; width:45%; margin-top:50px; margin-left: 100px"> 
 					<% if ribbon == "1" %>

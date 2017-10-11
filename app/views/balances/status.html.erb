@@ -1,3 +1,5 @@
+<!-- Bilanz/ Protokoll der Emissionseinträge -->
+
 <head>
 	<title>Bilanz</title>
 	<% content_for :title, "deine Bilanz" %>
@@ -5,11 +7,14 @@
 
 <body>
 	<div class="container">
+		
+	<!-- Liniendiagramm -->	
 		<div> 
 			<h3> Dein CO2 Ausstoß im Zeitverlauf</h3>
 			<%= balance %>
 		</div>
-		
+	
+	<!-- Tabelle der Einträge -->	
 		<div style="margin-top:150px", class="table-responsive">
 			<h3> Dein Protokoll</h3>
   			<table class="table">

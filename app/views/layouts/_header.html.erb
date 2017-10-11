@@ -1,25 +1,26 @@
-<!-- Header -->
-				<header id="header">
-					<div class="logo container">
-						<div>
-							<h4><a><%= yield(:title)%></a></h4>
-						</div>
-					</div>
-				</header>
-				
+<!-- Ausgelagerter Header -->
+
+<header id="header">
+	<div class="logo container">
+		<div>
+			<h4><a><%= yield(:title)%></a></h4>
+		</div>
+	</div>
+</header>
+
 <!-- Nav -->
-				<nav id="nav">
-					<ul>
-						<li class ="current"><%= link_to "Home", balances_path %></li>
-						<li href ="current"><%= link_to "Profil", profil_balances_path %></li>
-						<li href ="current"><%= link_to "Emissionsrechner", balances_new_path, data: { turbolinks: false } %></li>
-						<li href ="current"><%= link_to "Bilanz", status_balances_path %></li>
-						<li href ="current"><%= link_to "Auswertung", analysis_balances_path %></li>
-						<!-- Angepasste Anzeige bei eingeloggtem/nicht eingeloggtem User -->
-						<% if user_signed_in? %>
-							<li href ="current"><%= link_to "Abmelden", destroy_user_session_path, :method => :delete  %></li>
-						<% else %>
-							<li href ="current"><%= link_to "Logge dich ein!", new_user_session_path %></li>
-						<% end %>
-					</ul>
-				</nav>
+<nav id="nav">
+	<ul>
+		<li class ="current"><%= link_to "Home", balances_path %></li>
+		<li href ="current"><%= link_to "Profil", profil_balances_path %></li>
+		<li href ="current"><%= link_to "Emissionsrechner", balances_new_path, data: { turbolinks: false } %></li>
+		<li href ="current"><%= link_to "Bilanz", status_balances_path %></li>
+		<li href ="current"><%= link_to "Auswertung", analysis_balances_path %></li>
+		<!-- Angepasste Anzeige bei eingeloggtem/nicht eingeloggtem User -->
+		<% if user_signed_in? %>
+			<li href ="current"><%= link_to "Abmelden", destroy_user_session_path, :method => :delete  %></li>
+		<% else %>
+			<li href ="current"><%= link_to "Logge dich ein!", new_user_session_path %></li>
+		<% end %>
+	</ul>
+</nav>

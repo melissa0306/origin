@@ -1,3 +1,5 @@
+<!-- Formular für Emissionseintragenung --> 
+
 <%= simple_form_for(@balance) do |f| %>
 <%= f.input :date, :order => [:day, :month, :year], label: "Datum" %>
 <%= f.input :track_length, input_html: {value: f.object.track_length || '1'}, label: "zurückgelegte Km" %>

@@ -183,21 +183,21 @@ module BalancesHelper
 
 # Durchschnitt Strecke mit Auto     
     def average_auto
-        unless sum_auto.nil? 
+        unless sum_auto.nil? || sum_auto == 0 
             @balances.where(:user_id => current_user.id , :means_of_transport => "Auto").average(:track_length).round(2)
         end
     end
     
 # Durchschnitt Strecke mit öffentlichen Transport
     def average_öffentlich
-        unless sum_bahn_nah.nil? && sum_reisebus.nil? && sum_linienbus.nil? && sum_bahn_fern.nil? 
+        unless sum_bahn_nah.nil? || sum_bahn_nah == 0 && sum_reisebus.nil? || sum_reisebus == 0 && sum_linienbus.nil? || sum_linienbus == 0 && sum_bahn_fern.nil? || sum_bahn_fern == 0 
             @balances.where(:user_id => current_user.id , means_of_transport: ["Bahn-Fernverkehr", "Bahn-Nahverkehr","Reisebus", "Linienbus"]).average(:track_length).round(2)
         end  
     end
     
 # Durchschnitt Strecke zu Fuß
     def average_fuss
-        unless sum_fahrrad.nil? && sum_zu_fuß.nil 
+        unless sum_fahrrad.nil? || sum_fahrrad == 0 && sum_zu_fuß.nil? || sum_zu_fuß == 0
             Balance.where(:user_id => current_user.id, means_of_transport: ["Fahrrad", "zu Fuß"]).average(:track_length).round(2)
         end
     end
