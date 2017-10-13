@@ -26,13 +26,12 @@ module BalancesHelper
         column_chart [
         {name: "Ich (Gesamt)", data: {"": sum_emission}},
         {name: "Durchschnitt", data: {"": "2190"}},
-        {name: "Hochrechnung eigener Durchschnitt (Jahr)", data: {"": extrapolation}},
         {name: "Durchschnitt Wohnort", data: {"": comparison_place_of_residence}},
         {name: "Unser Ziel", data: {"": "1752"}}
         ],
         width: "500px", height: "300px",
         ytitle: "kg/Jahr",
-        colors: ["#2fef1a", "#6c7687" ,"#2fef1a", "#caccc7", "#3eaeef"]
+        colors: ["#2fef1a", "#6c7687", "#caccc7", "#3eaeef"]
     end
     
     
