@@ -24,7 +24,7 @@ module BalancesHelper
 # Vergleich Gesamte Emission mit Durchschnitt    
     def comparison
         column_chart [
-        {name: "Ich", data: {"": sum_emission}},
+        {name: "Ich (Gesamt)", data: {"": sum_emission}},
         {name: "Durchschnitt", data: {"": "2190"}},
         {name: "Hochrechnung eigener Durchschnitt (Jahr)", data: {"": extrapolation}},
         {name: "Durchschnitt Wohnort", data: {"": comparison_place_of_residence}},
@@ -83,9 +83,9 @@ module BalancesHelper
 # Vergleich mit Ziel
     def comparison_goal
         if sum_emission   > 438  #20% von 2190 
-            "über"
+            "niedriger"
         else 
-            "unter"
+            "höher"
         end
     end 
     
