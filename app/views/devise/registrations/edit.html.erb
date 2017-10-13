@@ -1,3 +1,5 @@
+<!-- Profil bearbeiten -->
+
 <body>
   
 	<div class="container">
@@ -11,45 +13,45 @@
 		<div class="field">
 			<%= f.label :email %>
 			<%= f.email_field :email, autofocus: true %></br>
-		  </div>
+		</div>
 		
-		  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+		<% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
 			<div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-		  <% end %>
+		<% end %>
 		
 		
-		 <div class="field">
+		<div class="field">
 			<%= f.label :Geburtstag %> 
 			<%= f.date_field :birthday %><br /><br />
-		  </div>
+		</div>
 		
-		  <div class="field">
+		<div class="field">
 			<%= f.label :Wohnort %>
 			<%= f.text_field :place_of_residence %><br />
-		  </div>
+		</div>
 		
-		  <div class="field">
+		<div class="field">
 			<%= f.label :passwort %> <i>(Lasse es aus wenn du nichts ändern möchtest)</i>
 			<%= f.password_field :password, autocomplete: "off" %>
 			<% if @minimum_password_length %>
 		  	<em>mindestens <%= @minimum_password_length %> Zeichen</em>
 		  	</br>
 			<% end %></br>
-		  </div>
+		</div>
 		
-		  <div class="field">
+		<div class="field">
 			<%= f.label :passwort_bestätigung %>
 			<%= f.password_field :password_confirmation, autocomplete: "off" %><br />
-		  </div>
+		</div>
 		
-		  <div class="field">
+		<div class="field">
 			<%= f.label :aktuelles_passwort %> <i>(Wir brauchen dein Passwort um deine Änderungen zu bestätigen)</i>
 			<%= f.password_field :current_password, autocomplete: "off" %><br />
-		  </div>
+		</div>
 		
-		  <div class="actions">
+		<div class="actions">
 			<%= f.submit "Update" %>
-		  </div>
+		</div>
 		<% end %>
 		
 		<br>

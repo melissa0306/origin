@@ -87,4 +87,6 @@ class BalancesController < ApplicationController
     def balance_params
         params.require(:balance).permit(:date, :emission, :track_length, :user_id, :means_of_transport)
     end
+    
+    
 end

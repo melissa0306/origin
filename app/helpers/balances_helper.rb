@@ -1,5 +1,6 @@
 module BalancesHelper
-    
+
+
 # Kreisdiagramm 
     def used_transport
         pie_chart Balance.where(:user_id => current_user.id).group(:means_of_transport).count
@@ -25,12 +26,13 @@ module BalancesHelper
         column_chart [
         {name: "Ich", data: {"": sum_emission}},
         {name: "Durchschnitt", data: {"": "2190"}},
+        {name: "Hochrechnung eigener Durchschnitt (Jahr)", data: {"": extrapolation}},
         {name: "Durchschnitt Wohnort", data: {"": comparison_place_of_residence}},
         {name: "Unser Ziel", data: {"": "1752"}}
         ],
         width: "500px", height: "300px",
         ytitle: "kg/Jahr",
-        colors: ["#2fef1a", "#6c7687" , "#caccc7", "#3eaeef"]
+        colors: ["#2fef1a", "#6c7687" ,"#2fef1a", "#caccc7", "#3eaeef"]
     end
     
     
@@ -54,6 +56,13 @@ module BalancesHelper
     def sum_emission
         Balance.where(:user_id => current_user.id).sum(:emission)
     end   
+    
+# Durchschnitt hochrechnen
+    def extrapolation
+        unless sum_emission.nil? || sum_emission == 0
+            Balance.where(:user_id => current_user.id).average(:emission)  * 365
+        end
+    end
     
 # Vergleich Emission mit Durchschnitt des Wohnorts 
     def comparison_place_of_residence

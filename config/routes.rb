@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
   get 'balances/index' => 'balances#index'
   get 'balances/new' => 'balances#new'
+  
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

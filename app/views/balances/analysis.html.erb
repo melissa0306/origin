@@ -31,12 +31,12 @@
 				</div>
 	    		
 	    		<div style="float:right; width:45%; margin-top:50px"> 
-	    			<p> Dein meinstgenutztes Transportmittel ist <b><%= max_anzahl %></b></p>
+	    			<p> Dein meistgenutztes Transportmittel ist <b><%= max_anzahl %></b></p>
 	    			<% if sum_auto >= sum_bahn_fern + sum_bahn_nah + sum_linienbus + sum_reisebus %>
-	    				<p>Du bevorzugst es mit dem Auto zu fahren. Nutze den <b>öffentlichen Personennahverkehr</b> oder die<b> Bahn </b> anstelle des eigenen PKW <br>
+	    				<p>Du bevorzugst es mit dem Auto zu fahren. Nutze den <b>Öffentlichen Personennahverkehr</b> oder die<b> Bahn </b> anstelle des eigenen PKW <br>
 	    				Auf vielen Strecken sparst du damit sogar Zeit und kannst die Fahrzeit <b>effektiv</b> zum Arbeiten oder Entspannen nutzen!</p>
 	    			<%else%>
-	       				<p><b>Klasse!</b> du bevorzugst den öffentlichen Personennahverkehr gegebüber deinem PKW und schohnst somit die Umwelt </p>
+	       				<p><b>Klasse!</b> du bevorzugst den Öffentlichen Personennahverkehr gegebüber deinem PKW und schonst somit die Umwelt </p>
 	    			<%end%>
 	    		</div>
 	    		
@@ -82,7 +82,7 @@
 					<% else %>
 						<p> Versuche öfters auf <b>Elektroautos</b> zurückzugreifen. Viele <b>Carsharing</b>anbieter haben sie im Angebot und sie sind eine <b>umweltfreundlichere</b> Alternative gegenüber normalen PKWs. </p>
 					<% end %>
-					<p> Mit dem <b>Auto</b> erreichst du einen Gesamtausstoß von <b><%= emission_auto %> kg</b>. Mit öffentlichen Verkehrsmitteln würdest du für die selbe Strecke <b><%= (emission_auto*0.37).round(3)%> kg</b> ausstoßen.
+					<p> Mit dem <b>Auto</b> erreichst du einen Gesamtausstoß von <b><%= emission_auto %> kg</b>. Mit Öffentlichen Verkehrsmitteln würdest du für die selbe Strecke <b><%= (emission_auto*0.37).round(3)%> kg</b> ausstoßen.
 	        	</div>
 	        	
 	        	<p style="clear:both;"></p>
@@ -113,7 +113,6 @@
 	        		<img src="/assets/bear.jpg", width="176" height="268.4">
 	        	<% end %>
 	        	</div>
-	        	
         	</font>
         </div>
    
